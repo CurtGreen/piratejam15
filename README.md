@@ -15,5 +15,5 @@ To push your changes to your branch of the repo
 ```
 git add .
 git commit -m "a detailed message describing what you have changed in this commit"
-git push origin YOUR_FIRST_NAME
+git push origin main:YOUR_FIRST_NAME
 ```
