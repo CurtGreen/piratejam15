@@ -1,4 +1,4 @@
-Stuff
+#How To Use The Repo
 
 To use clone the repository to your local machine
 ```
@@ -17,3 +17,10 @@ git add .
 git commit -m "a detailed message describing what you have changed in this commit"
 git push origin main:YOUR_FIRST_NAME
 ```
+
+When starting your work for the day, to retrieve merged changes to the repo
+```
+git pull
+```
+
+When finishing your work for your working session please push your changes to your branch
