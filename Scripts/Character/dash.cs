@@ -6,18 +6,36 @@ public partial class dash : Node
 {
     public bool dashing = false;
     public bool canDash = true;
-    public async void HandleDash(double delta, Vector2 moveDirection, bool dashPressed, CharacterBody2D body, float DashForce, float DashDuration, float DashCooldown)
+    private int dashCount = 0;
+    private int maxDashes = 2;
+
+    public async void HandleDash(double delta, Vector2 moveDirection, bool dashPressed, CharacterBody2D body, float DashForce, float DashDuration, float DashCooldown, Player.Element element)
     {
-        if (dashPressed && canDash && !dashing)
+        if (element == Player.Element.AIR)
+        { maxDashes = 2; }
+        else
+        { maxDashes = 1; }
+
+        if (dashPressed && canDash && !dashing && dashCount < maxDashes)
         {
             dashing = true;
-            canDash = false;
-            body.Velocity = new Vector2(DashForce * moveDirection.X, body.Velocity.Y);
+            dashCount++;
+            if(element == Player.Element.EARTH)
+            { body.Velocity = new Vector2(DashForce * 2 * moveDirection.X, DashForce * -1 ); }
+            else
+            { body.Velocity = new Vector2(DashForce * moveDirection.X, body.Velocity.Y); } 
+            
             // Optionally: Play dash animation here
             await ToSignal(body.GetTree().CreateTimer(DashDuration), "timeout");
             dashing = false;
-            await ToSignal(body.GetTree().CreateTimer(DashCooldown), "timeout");
-            canDash = true;
+            
+            if(dashCount >= maxDashes)
+            {
+                await ToSignal(body.GetTree().CreateTimer(DashCooldown), "timeout");
+                dashCount = 0;
+                canDash = true;
+                
+            }
         }
     }
 }

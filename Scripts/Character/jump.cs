@@ -7,14 +7,23 @@ public partial class jump : Node
     private bool shouldJump = false;
     private bool wallJump = false;
     private bool jumping = false;
+    private int jumpCount = 0;
+    private int maxJumps = 2;
     
     public enum JumpDirections { UP = -1, DOWN = 1 }
 
-	public void HandleJump(double delta, Vector2 moveDirection, float jumpStrength, bool jumpPressed, bool jumpReleased, CharacterBody2D body, bool canWallJump, float JumpForce, float JumpCancelForce, double JumpBufferTimer)
+	public void HandleJump(double delta, Vector2 moveDirection, float jumpStrength, bool jumpPressed, bool jumpReleased, CharacterBody2D body, bool canWallJump, float JumpForce, float JumpCancelForce, double JumpBufferTimer, Player.Element element)
     {
-        if ((jumpPressed || shouldJump) && canJump)
+       
+        if (element == Player.Element.AIR)
+        { maxJumps = 2; }
+        else
+        { maxJumps = 1; }   
+
+        if ((jumpPressed || shouldJump) && (canJump || jumpCount < maxJumps))
         {
             ApplyJump(moveDirection, body, JumpForce, JumpDirections.UP);
+            jumpCount++;
         }
         else if (jumpPressed)
         {
@@ -29,6 +38,7 @@ public partial class jump : Node
             canJump = true;
             wallJump = true;
             jumping = false;
+            jumpCount = 0;
         }
 
         if (body.IsOnFloor() && body.Velocity.Y >= 0)
@@ -36,6 +46,7 @@ public partial class jump : Node
             canJump = true;
             wallJump = false;
             jumping = false;
+            jumpCount = 0;
         }
     }
 
@@ -86,4 +97,6 @@ public partial class jump : Node
         await ToSignal(body.GetTree().CreateTimer(CoyoteTimer), "timeout");
         canJump = false;
     }
+
+    
 }
