@@ -4,6 +4,7 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	public enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH }
+    public enum Element { AIR, EARTH, FIRE, WATER, NONE };
 
     [Export] public NodePath PlayerSpritePath;
     [Export] public NodePath AnimationPlayerPath;
@@ -36,6 +37,11 @@ public partial class Player : CharacterBody2D
     [Export] public float DashForce = 1200.0f;
     [Export] public float DashDuration = 0.2f;
 
+    [Export] public Element MoveType = Element.NONE;
+    [Export] public Element JumpType = Element.NONE;
+    [Export] public Element AttackType = Element.NONE;
+    [Export] public Element DashType = Element.NONE;
+
     public CharacterState state = CharacterState.IDLE;
     private bool canWallJump;
     private bool canAttack = true;
@@ -64,10 +70,9 @@ public partial class Player : CharacterBody2D
 
     private void PhysicsTick(double delta)
     {
-        Console.WriteLine(dash_script.dashing);
         var inputs = GetInputs();
-        jump_script.HandleJump(delta, inputs.inputDirection, inputs.jumpStrength, inputs.jumpPressed, inputs.jumpReleased, this, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer);
-        dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown);
+        jump_script.HandleJump(delta, inputs.inputDirection, inputs.jumpStrength, inputs.jumpPressed, inputs.jumpReleased, this, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType);
+        dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown, DashType);
         if (!dash_script.dashing)
         {
             move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance);
