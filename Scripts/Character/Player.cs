@@ -121,7 +121,6 @@ public partial class Player : CharacterBody2D
 		switch (state)
 		{
 			case CharacterState.IDLE:
-				AnimationPlayer.Stop(false);
 				AnimationPlayer.Play("Idle");
 				break;
 			case CharacterState.WALK:
