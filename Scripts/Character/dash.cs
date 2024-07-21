@@ -21,7 +21,7 @@ public partial class dash : Node
             dashing = true;
             dashCount++;
             if(element == Player.Element.EARTH)
-            { body.Velocity = new Vector2(DashForce * 2 * moveDirection.X, DashForce * -1 ); }
+            { body.Velocity = new Vector2(DashForce * 1.0f * moveDirection.X, DashForce * 0.8f * -1 ); }
             else
             { body.Velocity = new Vector2(DashForce * moveDirection.X, body.Velocity.Y); } 
             

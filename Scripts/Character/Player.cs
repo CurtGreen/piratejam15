@@ -6,6 +6,9 @@ public partial class Player : CharacterBody2D
 	public enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH }
     public enum Element { AIR, EARTH, FIRE, WATER, NONE };
 
+    [Export] public int PlayerHealth = 5;
+    [Export] public int MaxPlayerHealth = 5;
+
     [Export] public NodePath PlayerSpritePath;
     [Export] public NodePath AnimationPlayerPath;
     private Sprite2D PlayerSprite;
@@ -57,6 +60,8 @@ public partial class Player : CharacterBody2D
         AnimationPlayer = GetNode<AnimationPlayer>(AnimationPlayerPath) ?? GetNode<AnimationPlayer>("AnimationPlayer");
         canWallJump = EnableWallJumping;
 
+        PlayerHealth=MaxPlayerHealth;
+
         move_script = (move)GD.Load<CSharpScript>("res://Scripts/Character/move.cs").New();
         jump_script = (jump)GD.Load<CSharpScript>("res://Scripts/Character/jump.cs").New();
         dash_script = (dash)GD.Load<CSharpScript>("res://Scripts/Character/dash.cs").New();
@@ -75,7 +80,7 @@ public partial class Player : CharacterBody2D
         dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown, DashType);
         if (!dash_script.dashing)
         {
-            move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance);
+            move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType);
         }
 
         ManageAnimations();
