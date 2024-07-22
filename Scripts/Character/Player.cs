@@ -77,17 +77,15 @@ public partial class Player : CharacterBody2D
     {
         var inputs = GetInputs();
         jump_script.HandleJump(delta, inputs.inputDirection, inputs.jumpStrength, inputs.jumpPressed, inputs.jumpReleased, this, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType);
-        dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown, DashType);
+		dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown, DashType);
         if (!dash_script.dashing)
         {
             move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType);
         }
-
+		jump_script.HandleGravity(delta, this, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer);
+		attack_script.HandleAttack(this, AttackCooldown, inputs.attackPressed);
 		ManageAnimations();
 		ManageState();
-
-		jump_script.HandleGravity(delta, this, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer);
-
 		MoveAndSlide();
 	}
 
@@ -123,7 +121,7 @@ public partial class Player : CharacterBody2D
 	{
 		PlayerSprite.FlipH = Velocity.X < 0;
 		
-		switch (state)
+		/*switch (state)
 		{
 			case CharacterState.IDLE:
 				AnimationPlayer.Play("Idle");
@@ -149,18 +147,19 @@ public partial class Player : CharacterBody2D
 			case CharacterState.DASH:
 				AnimationPlayer.Play("Dash");
 				break;
-		}
+		}*/
 		
 	}
 
-	private (Vector2 inputDirection, float jumpStrength, bool jumpPressed, bool jumpReleased, bool dashPressed) GetInputs()
+	private (Vector2 inputDirection, float jumpStrength, bool jumpPressed, bool jumpReleased, bool dashPressed, bool attackPressed) GetInputs()
 	{
 		return (
 			GetInputDirection(),
 			Input.GetActionStrength(ActionJump),
 			Input.IsActionJustPressed(ActionJump),
 			Input.IsActionJustReleased(ActionJump),
-			Input.IsActionJustPressed(ActionDash)
+			Input.IsActionJustPressed(ActionDash),
+			Input.IsActionJustPressed(ActionAttack)
 		);
 	}
 
@@ -170,5 +169,20 @@ public partial class Player : CharacterBody2D
 		float yDir = Input.GetActionStrength(ActionDown) - Input.GetActionStrength(ActionUp);
 
 		return new Vector2(JoystickMovement ? xDir : Mathf.Sign(xDir), JoystickMovement ? yDir : Mathf.Sign(yDir));
+	}
+
+	private void _on_basic_attack_collider_area_entered(object area)
+	{
+		Console.WriteLine("Player hit something");
+	}
+
+	private void _on_basic_attack_collider_body_shape_entered(object area)
+	{
+		Console.WriteLine("Player hit something");
+	}
+
+	private void _on_basic_attack_collider_area_shape_entered(object area)
+	{
+		Console.WriteLine("Player hit something");
 	}
 }
