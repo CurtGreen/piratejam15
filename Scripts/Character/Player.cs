@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D
 
 	[Export] public NodePath PlayerSpritePath;
 	[Export] public NodePath AnimationPlayerPath;
-	private Sprite2D PlayerSprite;
+	private AnimatedSprite2D PlayerSprite;
 	private AnimationPlayer AnimationPlayer;
 
 	[Export] public bool JoystickMovement = false;
@@ -56,7 +56,7 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		PlayerSprite = GetNode<Sprite2D>(PlayerSpritePath) ?? GetNode<Sprite2D>("Sprite2D");
+		PlayerSprite = GetNode<AnimatedSprite2D>(PlayerSpritePath) ?? GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		AnimationPlayer = GetNode<AnimationPlayer>(AnimationPlayerPath) ?? GetNode<AnimationPlayer>("AnimationPlayer");
 		canWallJump = EnableWallJumping;
 
