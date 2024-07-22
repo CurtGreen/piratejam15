@@ -4,10 +4,10 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	public enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH }
-    public enum Element { AIR, EARTH, FIRE, WATER, NONE };
+	public enum Element { AIR, EARTH, FIRE, WATER, NONE };
 
-    [Export] public int PlayerHealth = 5;
-    [Export] public int MaxPlayerHealth = 5;
+	[Export] public int PlayerHealth = 5;
+	[Export] public int MaxPlayerHealth = 5;
 
 	[Export] public NodePath PlayerSpritePath;
 	[Export] public NodePath AnimationPlayerPath;
@@ -54,13 +54,13 @@ public partial class Player : CharacterBody2D
 	private dash dash_script;
 	private attack attack_script;
 
-    public override void _Ready()
-    {
-        PlayerSprite = GetNode<Sprite2D>(PlayerSpritePath) ?? GetNode<Sprite2D>("Sprite2D");
-        AnimationPlayer = GetNode<AnimationPlayer>(AnimationPlayerPath) ?? GetNode<AnimationPlayer>("AnimationPlayer");
-        canWallJump = EnableWallJumping;
+	public override void _Ready()
+	{
+		PlayerSprite = GetNode<Sprite2D>(PlayerSpritePath) ?? GetNode<Sprite2D>("Sprite2D");
+		AnimationPlayer = GetNode<AnimationPlayer>(AnimationPlayerPath) ?? GetNode<AnimationPlayer>("AnimationPlayer");
+		canWallJump = EnableWallJumping;
 
-        PlayerHealth=MaxPlayerHealth;
+		PlayerHealth=MaxPlayerHealth;
 
 		move_script = (move)GD.Load<CSharpScript>("res://Scripts/Character/move.cs").New();
 		jump_script = (jump)GD.Load<CSharpScript>("res://Scripts/Character/jump.cs").New();
