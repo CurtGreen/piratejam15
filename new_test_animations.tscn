@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://p0yvffxq8t5s"]
 
 [ext_resource type="Texture2D" uid="uid://bbluoyi6e8jva" path="res://Assets/Art/Level/background.png" id="1_3gfgd"]
-[ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="2_grjqk"]
+[ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="2_ehdyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gie44"]
 size = Vector2(46, 287)
@@ -43,9 +43,6 @@ position = Vector2(431, -19)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_gie44")
 
-[node name="Player" parent="." instance=ExtResource("2_grjqk")]
-position = Vector2(0, 13)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(344, 137)
 zoom = Vector2(2, 2)
@@ -53,3 +50,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 550
 limit_bottom = 550
+
+[node name="Player" parent="." instance=ExtResource("2_ehdyi")]
+position = Vector2(62, 58)
