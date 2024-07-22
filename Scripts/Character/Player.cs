@@ -73,15 +73,15 @@ public partial class Player : CharacterBody2D
 		PhysicsTick(delta);
 	}
 
-    private void PhysicsTick(double delta)
-    {
-        var inputs = GetInputs();
-        jump_script.HandleJump(delta, inputs.inputDirection, inputs.jumpStrength, inputs.jumpPressed, inputs.jumpReleased, this, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType);
+	private void PhysicsTick(double delta)
+	{
+		var inputs = GetInputs();
+		jump_script.HandleJump(delta, inputs.inputDirection, inputs.jumpStrength, inputs.jumpPressed, inputs.jumpReleased, this, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType);
 		dash_script.HandleDash(delta, inputs.inputDirection, inputs.dashPressed, this, DashForce, DashDuration, DashCooldown, DashType);
-        if (!dash_script.dashing)
-        {
-            move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType);
-        }
+		if (!dash_script.dashing)
+		{
+			move_script.HandleVelocity(delta, inputs.inputDirection, this, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType);
+		}
 		jump_script.HandleGravity(delta, this, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer);
 		attack_script.HandleAttack(this, AttackCooldown, inputs.attackPressed);
 		ManageAnimations();
