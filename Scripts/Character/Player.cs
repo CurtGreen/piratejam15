@@ -95,7 +95,7 @@ public partial class Player : CharacterBody2D
 		{
 			state = CharacterState.DASH;
 		}
-		else if (Velocity.Y == 0.0)
+		else if (IsOnFloor())
 		{
 			state = Velocity.X == 0 ? CharacterState.IDLE : CharacterState.WALK;
 		}
@@ -103,7 +103,7 @@ public partial class Player : CharacterBody2D
 		{
 			state = CharacterState.JUMP;
 		}
-		else if (Velocity.Y > 0)
+		else if (!IsOnFloor())
 		{
 			if (canWallJump && IsOnWallOnly() && GetInputDirection().X != 0)
 			{
@@ -133,15 +133,12 @@ public partial class Player : CharacterBody2D
 				AnimationPlayer.Play("Jump");
 				break;
 			case CharacterState.FALL:
-				AnimationPlayer.Stop(false);
 				AnimationPlayer.Play("Fall");
 				break;
 			case CharacterState.WALL_SLIDE:
-				AnimationPlayer.Stop(false);
 				AnimationPlayer.Play("Fall");
 				break;
 			case CharacterState.ATTACK:
-				AnimationPlayer.Stop(false);
 				AnimationPlayer.Play("Attack");
 				break;
 			case CharacterState.DASH:
