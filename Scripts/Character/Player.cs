@@ -121,7 +121,7 @@ public partial class Player : CharacterBody2D
 	{
 		PlayerSprite.FlipH = Velocity.X < 0;
 		
-		/*switch (state)
+		switch (state)
 		{
 			case CharacterState.IDLE:
 				AnimationPlayer.Play("Idle");
@@ -147,7 +147,7 @@ public partial class Player : CharacterBody2D
 			case CharacterState.DASH:
 				AnimationPlayer.Play("Dash");
 				break;
-		}*/
+		}
 		
 	}
 
