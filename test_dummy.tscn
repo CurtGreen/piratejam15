@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://vbkjt3eig0p0"]
+
+[ext_resource type="Texture2D" uid="uid://bvnm4cfqq57c7" path="res://Assets/Art/Enemies/test_dummy.png" id="1_k1etm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otm2o"]
+radius = 16.0
+height = 68.0
+
+[node name="TestDummy" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CapsuleShape2D_otm2o")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_k1etm")
