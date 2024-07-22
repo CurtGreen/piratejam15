@@ -25,12 +25,12 @@ public partial class Player : CharacterBody2D
 	[Export] public string ActionAttack = "attack";
 	[Export] public string ActionDash = "dash";
 
-	[Export] public float Acceleration = 700.0f;
-	[Export] public float MaxSpeed = 300.0f;
-	[Export] public float Friction = 800.0f;
+	[Export] public float Acceleration = 200.0f;
+	[Export] public float MaxSpeed = 200.0f;
+	[Export] public float Friction = 1000.0f;
 	[Export] public float AirResistance = 200.0f;
-	[Export] public float Gravity = 1200.0f;//1200.0f
-	[Export] public float JumpForce = 700.0f;
+	[Export] public float Gravity = 900.0f;
+	[Export] public float JumpForce = 300.0f;
 	[Export] public float JumpCancelForce = 800.0f;
 	[Export] public float WallSlideSpeed = 50.0f;
 	[Export] public float CoyoteTimer = 0.08f;
@@ -38,7 +38,7 @@ public partial class Player : CharacterBody2D
 	[Export] public float AttackCooldown = 0.5f;
 	[Export] public float DashCooldown = 1.5f;
 	[Export] public float DashForce = 1200.0f;
-	[Export] public float DashDuration = 0.2f;
+	[Export] public float DashDuration = 0.1f;
 
 	[Export] public Element MoveType = Element.NONE;
 	[Export] public Element JumpType = Element.NONE;

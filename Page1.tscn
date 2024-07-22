@@ -3529,7 +3529,18 @@ layer_0/tile_data = PackedInt32Array(2555940, 2162688, 41, 2621476, 2162688, 42,
 
 [node name="Player" parent="." instance=ExtResource("1_ln4mf")]
 z_index = 5
-position = Vector2(1039, 535)
+position = Vector2(1028, 537)
+Acceleration = 200.0
+MaxSpeed = 200.0
+Friction = 1000.0
+Gravity = 900.0
+JumpForce = 300.0
+DashDuration = 0.1
+JumpType = 0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 40)
+zoom = Vector2(4, 4)
 
 [node name="Litter_Foreground" type="TileMap" parent="."]
 z_index = 100
