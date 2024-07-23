@@ -1,0 +1,371 @@
+[gd_scene load_steps=37 format=3 uid="uid://b26f13pfgjays"]
+
+[ext_resource type="Texture2D" uid="uid://cedg4ug8q6um4" path="res://Images/ResourceUI.png" id="1_a176g"]
+[ext_resource type="Script" path="res://MoveAbilityButton.gd" id="2_raduo"]
+[ext_resource type="Script" path="res://JumpAbilityButton.gd" id="3_fk37p"]
+[ext_resource type="Script" path="res://DashAbilityButton.gd" id="4_55yt5"]
+[ext_resource type="Script" path="res://AttackModifier.gd" id="4_m5rc6"]
+[ext_resource type="Script" path="res://AttackAbilityButton.gd" id="5_gqmrw"]
+[ext_resource type="Script" path="res://JumpModifier.gd" id="6_vgvt3"]
+[ext_resource type="Script" path="res://DashModifier.gd" id="8_yvwx8"]
+[ext_resource type="Texture2D" uid="uid://d38vqr3macyfu" path="res://Images/InvUI.png" id="9_8464i"]
+[ext_resource type="Script" path="res://MoveModifier.gd" id="10_07bxt"]
+[ext_resource type="Texture2D" uid="uid://r5ywtp2uc1wb" path="res://Images/Heart.png" id="10_qnkof"]
+[ext_resource type="Texture2D" uid="uid://fdplmclsfsku" path="res://Images/ButtonUI.png" id="11_wjgq2"]
+[ext_resource type="Texture2D" uid="uid://dgrgiebjpq3io" path="res://Images/JumpWord.png" id="16_d323w"]
+[ext_resource type="Texture2D" uid="uid://chpmh2p2wl6hc" path="res://Images/DashWord.png" id="18_mjr2o"]
+[ext_resource type="Texture2D" uid="uid://51ta454cdc6v" path="res://Images/AttackWord.png" id="20_cpmw7"]
+[ext_resource type="Texture2D" uid="uid://xknnaciv2a1y" path="res://Images/MoveWord.png" id="22_qvyox"]
+[ext_resource type="Texture2D" uid="uid://drphq5sjdd42b" path="res://Images/XboxA.png" id="24_lu06k"]
+[ext_resource type="StyleBox" uid="uid://dbf8jw4bp1vy1" path="res://WindResource.tres" id="25_2f8v6"]
+[ext_resource type="Texture2D" uid="uid://bqy0bl5be8hev" path="res://Images/XboxB.png" id="25_og8qm"]
+[ext_resource type="Script" path="res://WindResource.gd" id="26_js1ej"]
+[ext_resource type="StyleBox" uid="uid://gl8vx1qwjda" path="res://FireResource.tres" id="26_qcnoy"]
+[ext_resource type="Texture2D" uid="uid://ckcxwxtngknr0" path="res://Images/XboxX.png" id="26_wy8y5"]
+[ext_resource type="Texture2D" uid="uid://dwbembrovj2mr" path="res://Images/XboxY.png" id="27_emnwq"]
+[ext_resource type="Texture2D" uid="uid://muvisp3x6dg4" path="res://Images/ActionNotAllowed.png" id="28_awtrt"]
+[ext_resource type="Script" path="res://FireResource.gd" id="28_b3w5p"]
+[ext_resource type="Script" path="res://WaterResource.gd" id="29_gurfg"]
+[ext_resource type="Texture2D" uid="uid://dnjvd4m8lhadh" path="res://Images/FirewormTooth.png" id="29_ndo8a"]
+[ext_resource type="StyleBox" uid="uid://dtwgmd3pb0e5" path="res://EarthResource.tres" id="30_6xev6"]
+[ext_resource type="Texture2D" uid="uid://bcfjn8pi7tiw4" path="res://Images/EyeOfNewt.png" id="30_ov10u"]
+[ext_resource type="Script" path="res://EarthResource.gd" id="31_kfuyk"]
+[ext_resource type="Texture2D" uid="uid://2lvwqr0lav01" path="res://Images/Clover.png" id="31_yusld"]
+[ext_resource type="Texture2D" uid="uid://dn0b6qlofky1a" path="res://Images/BatWing.png" id="32_ekmm2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hovwq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cyxnk"]
+color = Color(0.0823529, 0.278431, 1, 1)
+thickness = 78
+
+[sub_resource type="Theme" id="Theme_dijib"]
+
+[sub_resource type="Theme" id="Theme_3w4py"]
+
+[node name="Node2D" type="Node2D"]
+material = SubResource("CanvasItemMaterial_hovwq")
+position = Vector2(1, 3)
+
+[node name="ResourceUi" type="Sprite2D" parent="."]
+position = Vector2(123.5, 69)
+scale = Vector2(0.366218, 0.396783)
+texture = ExtResource("1_a176g")
+
+[node name="WindResource" type="ProgressBar" parent="ResourceUi"]
+show_behind_parent = true
+offset_left = -185.72
+offset_top = -79.5559
+offset_right = 293.28
+offset_bottom = 0.444061
+theme_override_font_sizes/font_size = 30
+theme_override_styles/fill = ExtResource("25_2f8v6")
+value = 40.0
+script = ExtResource("26_js1ej")
+
+[node name="FireResource" type="ProgressBar" parent="ResourceUi"]
+show_behind_parent = true
+offset_left = -185.72
+offset_top = -160.416
+offset_right = 291.28
+offset_bottom = -79.4161
+theme_override_font_sizes/font_size = 30
+theme_override_styles/fill = ExtResource("26_qcnoy")
+script = ExtResource("28_b3w5p")
+
+[node name="WaterResource" type="ProgressBar" parent="ResourceUi"]
+show_behind_parent = true
+offset_left = -186.0
+offset_top = -1.0
+offset_right = 291.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/fill = SubResource("StyleBoxLine_cyxnk")
+value = 70.0
+script = ExtResource("29_gurfg")
+
+[node name="EarthResource" type="ProgressBar" parent="ResourceUi"]
+show_behind_parent = true
+offset_left = -186.0
+offset_top = 80.0
+offset_right = 291.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/fill = ExtResource("30_6xev6")
+value = 100.0
+script = ExtResource("31_kfuyk")
+
+[node name="InvUi" type="Sprite2D" parent="ResourceUi"]
+position = Vector2(15.0185, 192.801)
+scale = Vector2(0.662426, 0.647733)
+texture = ExtResource("9_8464i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourceUi/InvUi"]
+offset_left = -450.0
+offset_top = -51.0
+offset_right = 413.0
+offset_bottom = 58.0
+
+[node name="Item1" type="Panel" parent="ResourceUi/InvUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Item2" type="Panel" parent="ResourceUi/InvUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Item3" type="Panel" parent="ResourceUi/InvUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Item4" type="Panel" parent="ResourceUi/InvUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Item5" type="Panel" parent="ResourceUi/InvUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="HeartContainer" type="Sprite2D" parent="ResourceUi"]
+position = Vector2(334.5, 46.3332)
+rotation = 1.5708
+scale = Vector2(0.446764, 0.666956)
+texture = ExtResource("9_8464i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourceUi/HeartContainer"]
+offset_left = -450.0
+offset_top = -51.0
+offset_right = 413.0
+offset_bottom = 58.0
+
+[node name="Heart1" type="Panel" parent="ResourceUi/HeartContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Heart" type="Sprite2D" parent="ResourceUi/HeartContainer/HBoxContainer/Heart1"]
+position = Vector2(84.0603, 55.3628)
+rotation = -1.5708
+scale = Vector2(0.237672, 0.312209)
+texture = ExtResource("10_qnkof")
+
+[node name="Heart2" type="Panel" parent="ResourceUi/HeartContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Heart" type="Sprite2D" parent="ResourceUi/HeartContainer/HBoxContainer/Heart2"]
+position = Vector2(85.5333, 53.7663)
+rotation = -1.5708
+scale = Vector2(0.228541, 0.296819)
+texture = ExtResource("10_qnkof")
+
+[node name="Heart3" type="Panel" parent="ResourceUi/HeartContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Heart" type="Sprite2D" parent="ResourceUi/HeartContainer/HBoxContainer/Heart3"]
+position = Vector2(84.4649, 54.4494)
+rotation = -1.5708
+scale = Vector2(0.228007, 0.308024)
+texture = ExtResource("10_qnkof")
+
+[node name="Heart4" type="Panel" parent="ResourceUi/HeartContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Heart" type="Sprite2D" parent="ResourceUi/HeartContainer/HBoxContainer/Heart4"]
+position = Vector2(85.0945, 54.5197)
+rotation = -1.5708
+scale = Vector2(0.232636, 0.303064)
+texture = ExtResource("10_qnkof")
+
+[node name="Heart5" type="Panel" parent="ResourceUi/HeartContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Heart" type="Sprite2D" parent="ResourceUi/HeartContainer/HBoxContainer/Heart5"]
+position = Vector2(85.6199, 55.0942)
+rotation = -1.5708
+scale = Vector2(0.239551, 0.309053)
+texture = ExtResource("10_qnkof")
+
+[node name="ButtonUi" type="Sprite2D" parent="."]
+position = Vector2(1024, 582)
+scale = Vector2(0.319444, 0.442907)
+texture = ExtResource("11_wjgq2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ButtonUi"]
+show_behind_parent = true
+anchors_preset = -1
+anchor_left = -3.211
+anchor_top = -3.76
+anchor_right = -3.211
+anchor_bottom = -3.76
+offset_left = 2736.3
+offset_top = 968.64
+offset_right = 2897.3
+offset_bottom = 1144.64
+rotation = 0.837758
+theme = SubResource("Theme_dijib")
+
+[node name="MoveAbilityButton" type="Panel" parent="ButtonUi/NinePatchRect"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 87.0
+theme = SubResource("Theme_3w4py")
+script = ExtResource("2_raduo")
+
+[node name="JumpAbilityButton" type="Panel" parent="ButtonUi/NinePatchRect"]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 89.0
+offset_right = 162.0
+offset_bottom = 173.0
+script = ExtResource("3_fk37p")
+
+[node name="DashAbilityButton" type="Panel" parent="ButtonUi/NinePatchRect"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 88.0
+offset_right = 79.0
+offset_bottom = 173.0
+script = ExtResource("4_55yt5")
+
+[node name="AttackAbilityButton" type="Panel" parent="ButtonUi/NinePatchRect"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 3.0
+offset_right = 161.0
+offset_bottom = 87.0
+script = ExtResource("5_gqmrw")
+
+[node name="JumpWord" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(74.3479, 88.619)
+scale = Vector2(0.436281, 0.307234)
+texture = ExtResource("16_d323w")
+
+[node name="JumpModifier" type="PanelContainer" parent="ButtonUi/JumpWord"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.00117817
+anchor_top = 0.342057
+anchor_right = 0.150603
+anchor_bottom = 0.747123
+offset_left = 152.59
+offset_top = -129.045
+offset_right = 494.59
+offset_bottom = -39.0454
+grow_vertical = 2
+script = ExtResource("6_vgvt3")
+metadata/_edit_use_anchors_ = true
+
+[node name="DashWord" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(149.478, 32.7382)
+scale = Vector2(0.433789, 0.356497)
+texture = ExtResource("18_mjr2o")
+
+[node name="DashModifier" type="PanelContainer" parent="ButtonUi/DashWord"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_top = 0.349624
+anchor_right = 0.297143
+anchor_bottom = 0.62782
+offset_left = 138.0
+offset_top = -119.5
+offset_right = 425.0
+offset_bottom = -10.5
+grow_vertical = 2
+script = ExtResource("8_yvwx8")
+metadata/_edit_use_anchors_ = true
+
+[node name="AttackWord" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(-247.304, -24.8359)
+scale = Vector2(0.430243, 0.296793)
+texture = ExtResource("20_cpmw7")
+
+[node name="AttackModifier" type="PanelContainer" parent="ButtonUi/AttackWord"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.0297641
+anchor_top = 0.501077
+anchor_right = 0.0297641
+anchor_bottom = 0.733334
+offset_left = -513.114
+offset_top = -146.667
+offset_right = -163.114
+offset_bottom = -37.6668
+grow_vertical = 2
+script = ExtResource("4_m5rc6")
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveWord" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(-172.174, -83.539)
+scale = Vector2(0.375904, 0.323195)
+texture = ExtResource("22_qvyox")
+
+[node name="MoveModifier" type="PanelContainer" parent="ButtonUi/MoveWord"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -516.0
+offset_top = -173.0
+offset_right = -142.0
+offset_bottom = -5.0
+grow_vertical = 2
+script = ExtResource("10_07bxt")
+
+[node name="XboxA" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(-59.4783, 58.2799)
+scale = Vector2(0.454962, 0.408167)
+texture = ExtResource("24_lu06k")
+
+[node name="XboxB" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(15.6526, 2.25781)
+scale = Vector2(0.462242, 0.510698)
+texture = ExtResource("25_og8qm")
+
+[node name="XboxX" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(-106.435, -2.25775)
+scale = Vector2(0.463424, 0.509047)
+texture = ExtResource("26_wy8y5")
+
+[node name="XboxY" type="Sprite2D" parent="ButtonUi"]
+position = Vector2(-50.0869, -49.6718)
+scale = Vector2(0.559006, 0.5354)
+texture = ExtResource("27_emnwq")
+
+[node name="ActionNotAllowed" type="Sprite2D" parent="."]
+position = Vector2(623, 256)
+scale = Vector2(0.45979, 0.505734)
+texture = ExtResource("28_awtrt")
+
+[node name="FirewormTooth" type="Sprite2D" parent="."]
+position = Vector2(80, 146)
+scale = Vector2(0.183025, 0.15208)
+texture = ExtResource("29_ndo8a")
+
+[node name="EyeOfNewt" type="Sprite2D" parent="."]
+position = Vector2(171, 136)
+scale = Vector2(0.161519, 0.169302)
+texture = ExtResource("30_ov10u")
+
+[node name="Clover" type="Sprite2D" parent="."]
+position = Vector2(208, 147)
+scale = Vector2(0.129186, 0.0676993)
+texture = ExtResource("31_yusld")
+
+[node name="BatWing" type="Sprite2D" parent="."]
+position = Vector2(38, 147)
+scale = Vector2(0.112298, 0.0582755)
+texture = ExtResource("32_ekmm2")
