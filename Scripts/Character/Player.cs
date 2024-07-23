@@ -151,7 +151,7 @@ public partial class Player : CharacterBody2D
 				AnimationPlayer.Play("Dash");
 				break;
 			case CharacterState.HURT:
-				//AnimationPlayer.Play("Hurt");
+				AnimationPlayer.Play("Hurt");
 				break;
 		}
 
