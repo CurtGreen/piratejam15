@@ -1,9 +1,10 @@
 using Godot;
 using System;
+using System.Reflection.Emit;
 
 public partial class Player : CharacterBody2D
 {
-	public enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH }
+	public enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH, HURT }
 	public enum Element { AIR, EARTH, FIRE, WATER, NONE };
 
 	[Export] public int PlayerHealth = 5;
@@ -39,6 +40,7 @@ public partial class Player : CharacterBody2D
 	[Export] public float DashCooldown = 1.5f;
 	[Export] public float DashForce = 1200.0f;
 	[Export] public float DashDuration = 0.1f;
+	[Export] public float KnockBackForce = 200.0f;
 
 	[Export] public Element MoveType = Element.NONE;
 	[Export] public Element JumpType = Element.NONE;
@@ -91,29 +93,33 @@ public partial class Player : CharacterBody2D
 
 	private void ManageState()
 	{
-		if (dash_script.dashing)
+		if(state != CharacterState.HURT)
 		{
-			state = CharacterState.DASH;
-		}
-		else if (IsOnFloor())
-		{
-			state = Velocity.X == 0 ? CharacterState.IDLE : CharacterState.WALK;
-		}
-		else if (Velocity.Y < 0)
-		{
-			state = CharacterState.JUMP;
-		}
-		else if (!IsOnFloor())
-		{
-			if (canWallJump && IsOnWallOnly() && GetInputDirection().X != 0)
-			{
-				state = CharacterState.WALL_SLIDE;
-			}
-			else
-			{
-				state = CharacterState.FALL;
-			}
 			
+			if (dash_script.dashing)
+			{
+				state = CharacterState.DASH;
+			}
+			else if (IsOnFloor())
+			{
+				state = Velocity.X == 0 ? CharacterState.IDLE : CharacterState.WALK;
+			}
+			else if (Velocity.Y < 0)
+			{
+				state = CharacterState.JUMP;
+			}
+			else if (!IsOnFloor())
+			{
+				if (canWallJump && IsOnWallOnly() && GetInputDirection().X != 0)
+				{
+					state = CharacterState.WALL_SLIDE;
+				}
+				else
+				{
+					state = CharacterState.FALL;
+				}
+				
+			}
 		}
 	}
 
@@ -144,8 +150,15 @@ public partial class Player : CharacterBody2D
 			case CharacterState.DASH:
 				AnimationPlayer.Play("Dash");
 				break;
+			case CharacterState.HURT:
+				//AnimationPlayer.Play("Hurt");
+				break;
 		}
-		
+
+		if (state == CharacterState.HURT && !AnimationPlayer.IsPlaying())
+		{
+			state = CharacterState.IDLE;
+		}
 	}
 
 	private (Vector2 inputDirection, float jumpStrength, bool jumpPressed, bool jumpReleased, bool dashPressed, bool attackPressed) GetInputs()
@@ -168,18 +181,20 @@ public partial class Player : CharacterBody2D
 		return new Vector2(JoystickMovement ? xDir : Mathf.Sign(xDir), JoystickMovement ? yDir : Mathf.Sign(yDir));
 	}
 
-	private void _on_basic_attack_collider_area_entered(object area)
+	public void _on_player_space_body_entered(Node2D body)
 	{
-		Console.WriteLine("Player hit something");
+		if (body.IsInGroup("Enemy"))
+		{
+			Velocity = new Vector2(Mathf.Sign(Velocity.X) * -1 * KnockBackForce, KnockBackForce * 0.8f * -1 );
+			state = CharacterState.HURT;
+		}
 	}
 
-	private void _on_basic_attack_collider_body_shape_entered(object area)
+	public void _on_animation_player_animation_finished(string anim_name)
 	{
-		Console.WriteLine("Player hit something");
-	}
-
-	private void _on_basic_attack_collider_area_shape_entered(object area)
-	{
-		Console.WriteLine("Player hit something");
+		if (anim_name == "Hurt")
+		{
+			state = CharacterState.IDLE;
+		}
 	}
 }
