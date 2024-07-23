@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy4vtbopuu5wm"]
+[gd_scene load_steps=16 format=3 uid="uid://cy4vtbopuu5wm"]
 
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="1_mqxoo"]
 [ext_resource type="Texture2D" uid="uid://mltem3md6foa" path="res://Assets/Art/Cellar_TileMaps/SI_Cellar_Doors.png" id="2_hfric"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="4_lsm8i"]
 [ext_resource type="PackedScene" uid="uid://diq77ld1vcomu" path="res://Clutter_Animated/spikes.tscn" id="5_4janj"]
 [ext_resource type="Texture2D" uid="uid://ddgybhocm4o1p" path="res://icon.svg" id="6_l5d7u"]
+[ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://test_dummy.tscn" id="7_kt7kw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_602tu"]
 texture = ExtResource("2_hfric")
@@ -3520,7 +3521,7 @@ JumpType = 0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 40)
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [node name="LevelElements" type="Node2D" parent="."]
 
@@ -3579,7 +3580,7 @@ layer_0/tile_data = PackedInt32Array(655368, 3735552, 49, 720904, 3735552, 48, 7
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="TestEnemy" type="CharacterBody2D" parent="Enemies" groups=["Enemy"]]
-position = Vector2(927, 568)
+position = Vector2(755, 565)
 scale = Vector2(0.4, 0.4)
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/TestEnemy"]
@@ -3596,3 +3597,6 @@ shape = SubResource("RectangleShape2D_6ylcd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/TestEnemy"]
 scale = Vector2(6.27444, 6.27444)
 shape = SubResource("RectangleShape2D_uoela")
+
+[node name="TestDummy" parent="Enemies" instance=ExtResource("7_kt7kw")]
+position = Vector2(903, 592)
