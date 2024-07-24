@@ -13,6 +13,27 @@ public void HandleVelocity(double delta, Vector2 inputDirection, CharacterBody2D
 		{
 			ApplyFriction(delta, body, Friction, AirResistance);
 		}
+		if (element == Player.Element.FIRE && body.IsOnFloor())
+			{
+				Boolean inFire = false;
+				Area2D space = body.GetNode<Area2D>("PlayerSpace");
+				foreach (Node2D O in space.GetOverlappingAreas())
+				{
+					//inFire = O.GetGroups().Contains("Fire") ? true : false;
+					if(O.IsInGroup("Fire"))
+					{
+						inFire = true;
+						break;
+					}
+				}
+				if (!inFire)
+				{
+					var scene = GD.Load<PackedScene>("res://Fire.tscn");
+					Node2D fire = (Node2D)scene.Instantiate();
+					body.GetParent().AddChild(fire);
+					fire.Position = new Vector2 (body.Position.X, body.Position.Y + 30); // There is probably a better way to find the bottom of the sprite, but fuck it
+				}
+			}
 	}
 
 	private void ApplyVelocity(double delta, Vector2 moveDirection, CharacterBody2D body, bool dashing, float Acceleration, float MaxSpeed, Player.Element element)
