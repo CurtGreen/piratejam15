@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjrrj3lbnhksn"]
+
+[ext_resource type="Script" path="res://Scripts/Other/fire.gd" id="1_dpis5"]
+
+[sub_resource type="Gradient" id="Gradient_pxblg"]
+offsets = PackedFloat32Array(0, 0.508217, 1)
+colors = PackedColorArray(0.985131, 0.906713, 0.474475, 1, 0.893517, 0.386756, 0.121459, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ni6f0"]
+gradient = SubResource("Gradient_pxblg")
+
+[sub_resource type="Curve" id="Curve_6ceer"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tobcm"]
+curve = SubResource("Curve_6ceer")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f4nyj"]
+lifetime_randomness = 0.31
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 1)
+gravity = Vector3(0, -98, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_tobcm")
+color_ramp = SubResource("GradientTexture1D_ni6f0")
+turbulence_enabled = true
+turbulence_noise_scale = 0.725
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4aj0y"]
+size = Vector2(22, 20)
+
+[node name="Flame" type="Node2D" groups=["Fire"]]
+z_index = 1
+script = ExtResource("1_dpis5")
+
+[node name="Flame" type="GPUParticles2D" parent="." groups=["Fire"]]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_f4nyj")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Fire"]]
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Fire"]]
+position = Vector2(0, -8)
+scale = Vector2(-0.0800005, 1)
+shape = SubResource("RectangleShape2D_4aj0y")
