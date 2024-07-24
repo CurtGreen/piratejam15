@@ -63,9 +63,12 @@ limit_bottom = 550
 
 [node name="Player" parent="." instance=ExtResource("2_ehdyi")]
 position = Vector2(62, 58)
+Friction = 2000.0
 DashCooldown = 1.0
 DashForce = 400.0
 DashDuration = 0.75
+MoveType = 2
+AttackType = 2
 DashType = 0
 
 [node name="TileMap" type="TileMap" parent="."]

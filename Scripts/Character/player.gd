@@ -72,7 +72,7 @@ func _physics_tick(delta):
 	var inputs = get_inputs()
 	if(inputs.input_direction.x != 0 && inputs.input_direction.x != last_facing):
 		last_facing = inputs.input_direction.x
-		print(last_facing)
+		#print(last_facing)
 	
 	jump_script.handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released, self, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType)
 	dash_script.handle_dash(delta, last_facing, inputs.dash_pressed, self, DashForce, DashDuration, DashCooldown, DashType)
@@ -80,50 +80,63 @@ func _physics_tick(delta):
 		move_script.handle_velocity(delta, inputs.input_direction, self, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType)
 	jump_script.handle_gravity(delta, self, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer)
 	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed, AttackType, last_facing)
+	
+	
 	manage_animations()
-	manage_state()
 	move_and_slide()
 
+func blocking_state():
+	var block := false
+	if state == CharacterState.ATTACK:
+		block = true
+	elif state == CharacterState.HURT:
+		block = true
+	print(block)
+
 func manage_state():
-	if state != CharacterState.HURT:
-		if dash_script.dashing:
-			state = CharacterState.DASH
-		elif is_on_floor():
-			if velocity.x == 0:
-				state = CharacterState.IDLE
-			else:
-				state = CharacterState.WALK
-		elif velocity.y < 0:
-			state = CharacterState.JUMP
-		elif not is_on_floor():
-			if canWallJump and is_on_wall_only() and get_input_direction().x != 0:
-				state = CharacterState.WALL_SLIDE
-			else:
-				state = CharacterState.FALL
+	print(state)
+	if dash_script.dashing:
+		state = CharacterState.DASH
+	elif is_on_floor():
+		if velocity.x == 0:
+			state = CharacterState.IDLE
+		else:
+			state = CharacterState.WALK
+	elif velocity.y < 0:
+		state = CharacterState.JUMP
+	elif not is_on_floor():
+		if canWallJump and is_on_wall_only() and get_input_direction().x != 0:
+			state = CharacterState.WALL_SLIDE
+		else:
+			state = CharacterState.FALL
 
 func manage_animations():
-	PlayerSprite.set_flip_h(velocity.x < 0)
+	PlayerSprite.set_flip_h(last_facing < 0)
 
 	match state:
-		CharacterState.IDLE:
-			AP.play("Idle")
-		CharacterState.WALK:
-			AP.play("Walk")
-		CharacterState.JUMP:
-			AP.play("Jump")
-		CharacterState.FALL:
-			AP.play("Fall")
-		CharacterState.WALL_SLIDE:
-			AP.play("Fall")
-		CharacterState.ATTACK:
-			AP.play("Attack")
-		CharacterState.DASH:
-			AP.play("Dash")
 		CharacterState.HURT:
 			AP.play("Hurt")
+		CharacterState.ATTACK:
+			AP.play("Attack")
+		CharacterState.WALK:
+			AP.play("Walk")
+			manage_state()
+		CharacterState.JUMP:
+			AP.play("Jump")
+			manage_state()
+		CharacterState.FALL:
+			AP.play("Fall")
+			manage_state()
+		CharacterState.WALL_SLIDE:
+			AP.play("Fall")
+		CharacterState.DASH:
+			AP.play("Dash")
+		CharacterState.IDLE:
+			AP.play("Idle")
+			manage_state()
+			
 
-	if state == CharacterState.HURT and not AP.is_playing():
-		state = CharacterState.IDLE
+
 
 func get_inputs() -> Dictionary:
 	return {
@@ -149,5 +162,4 @@ func _on_player_space_body_entered(body: Node2D):
 		state = CharacterState.HURT
 
 func _on_animation_player_animation_finished(anim_name: String):
-	if anim_name == "Hurt":
-		state = CharacterState.IDLE
+	manage_state()
