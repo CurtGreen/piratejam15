@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://diq77ld1vcomu"]
+[gd_scene load_steps=7 format=3 uid="uid://diq77ld1vcomu"]
 
 [ext_resource type="Texture2D" uid="uid://ds042g2qipuwy" path="res://Assets/Art/Cellar_TileMaps/Spikes.png" id="1_chxq1"]
 
@@ -15,21 +15,6 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_8qqjp"]
-resource_name = "Spikes"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
@@ -70,7 +55,6 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_60qte"]
 _data = {
 "RESET": SubResource("Animation_7u3qd"),
-"Spikes": SubResource("Animation_8qqjp"),
 "Spikes_Animated": SubResource("Animation_lsh08"),
 "Spikes_unactivad": SubResource("Animation_w3k77")
 }
