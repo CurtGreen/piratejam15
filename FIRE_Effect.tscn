@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://itok1sdmmk5k"]
+
+[ext_resource type="Script" path="res://Part_effect_texture.gd" id="1_0j0l8"]
+
+[sub_resource type="Curve" id="Curve_jyict"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_kquea"]
+offsets = PackedFloat32Array(0, 0.48494, 1)
+colors = PackedColorArray(0.977831, 0.828039, 0.403814, 1, 0.945098, 0.333333, 0.0117647, 1, 1, 1, 1, 0)
+
+[node name="FLAMES" type="CPUParticles2D"]
+z_index = 2
+amount = 50
+lifetime = 0.3
+randomness = 0.75
+emission_shape = 4
+emission_points = PackedVector2Array()
+emission_colors = PackedColorArray()
+gravity = Vector2(0, -980)
+initial_velocity_max = 17.39
+angular_velocity_min = -674.74
+scale_amount_min = 0.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_jyict")
+color_ramp = SubResource("Gradient_kquea")
+script = ExtResource("1_0j0l8")

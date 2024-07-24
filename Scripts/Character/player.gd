@@ -11,8 +11,9 @@ enum Element { AIR, EARTH, FIRE, WATER, NONE }
 var PlayerSprite : AnimatedSprite2D
 var AP : AnimationPlayer
 
-@export var JoystickMovement = false
 @export var EnableWallJumping = false
+@export var JoystickMovement = false
+  
 @export var ActionUp = "up"
 @export var ActionDown = "down"
 @export var ActionLeft = "left"
@@ -41,7 +42,7 @@ var AP : AnimationPlayer
 @export var MoveType = Element.NONE
 @export var JumpType = Element.NONE
 @export var AttackType = Element.NONE
-@export var DashType = Element.NONE
+@export var DashType = Element.NONE    
 
 var last_facing = 1
 var state = CharacterState.IDLE
@@ -57,7 +58,6 @@ func _ready():
 	PlayerSprite = get_node_or_null(PlayerSpritePath) if PlayerSpritePath != null else $AnimatedSprite2D
 	AP = get_node_or_null(AnimationPlayerPath) if AnimationPlayerPath != null else $AnimationPlayer
 	canWallJump = EnableWallJumping
-
 	PlayerHealth = MaxPlayerHealth
 
 	move_script = preload("res://Scripts/Character/move.gd").new()
@@ -80,8 +80,6 @@ func _physics_tick(delta):
 		move_script.handle_velocity(delta, inputs.input_direction, self, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType)
 	jump_script.handle_gravity(delta, self, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer)
 	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed, AttackType, last_facing)
-	
-	
 	manage_animations()
 	move_and_slide()
 
@@ -91,10 +89,9 @@ func blocking_state():
 		block = true
 	elif state == CharacterState.HURT:
 		block = true
-	print(block)
+
 
 func manage_state():
-	print(state)
 	if dash_script.dashing:
 		state = CharacterState.DASH
 	elif is_on_floor():
@@ -134,9 +131,6 @@ func manage_animations():
 		CharacterState.IDLE:
 			AP.play("Idle")
 			manage_state()
-			
-
-
 
 func get_inputs() -> Dictionary:
 	return {

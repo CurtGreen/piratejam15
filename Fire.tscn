@@ -32,19 +32,19 @@ turbulence_noise_scale = 0.725
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4aj0y"]
 size = Vector2(22, 20)
 
-[node name="Flame" type="Node2D" groups=["Fire"]]
+[node name="Flame" type="Node2D" groups=["Damage", "Fire"]]
 z_index = 1
 script = ExtResource("1_dpis5")
 
-[node name="Flame" type="GPUParticles2D" parent="." groups=["Fire"]]
+[node name="Flame" type="GPUParticles2D" parent="." groups=["Damage", "Fire"]]
 amount = 400
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Fire"]]
+[node name="Area2D" type="Area2D" parent="." groups=["Damage", "Fire"]]
 z_index = 1
 scale = Vector2(0.04, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Fire"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Damage", "Fire"]]
 position = Vector2(0, -8)
 scale = Vector2(-0.0800005, 1)
 shape = SubResource("RectangleShape2D_4aj0y")
