@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cy4vtbopuu5wm"]
+[gd_scene load_steps=13 format=3 uid="uid://cy4vtbopuu5wm"]
 
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="1_mqxoo"]
 [ext_resource type="Texture2D" uid="uid://mltem3md6foa" path="res://Assets/Art/Cellar_TileMaps/SI_Cellar_Doors.png" id="2_hfric"]
 [ext_resource type="Texture2D" uid="uid://c6qsyj7u0gacr" path="res://Assets/Art/Cellar_TileMaps/SI_Cellar.png" id="3_i02ui"]
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="4_lsm8i"]
 [ext_resource type="PackedScene" uid="uid://diq77ld1vcomu" path="res://Clutter_Animated/spikes.tscn" id="5_4janj"]
-[ext_resource type="Texture2D" uid="uid://ddgybhocm4o1p" path="res://icon.svg" id="6_l5d7u"]
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://test_dummy.tscn" id="7_kt7kw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_602tu"]
@@ -3504,24 +3503,20 @@ size = Vector2(32, 319)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rv3kk"]
 size = Vector2(30, 96)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ylcd"]
-size = Vector2(115, 112.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uoela"]
-
 [node name="Playground" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("4_lsm8i")]
 z_index = 5
-position = Vector2(1028, 537)
+position = Vector2(1050, 539)
 DashForce = 800.0
 DashDuration = 0.3
 KnockBackForce = 400.0
+MoveType = 2
 JumpType = 0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, 40)
-zoom = Vector2(3, 3)
+position = Vector2(-2, 40)
+zoom = Vector2(2.5, 2.5)
 
 [node name="LevelElements" type="Node2D" parent="."]
 
@@ -3578,25 +3573,6 @@ format = 2
 layer_0/tile_data = PackedInt32Array(655368, 3735552, 49, 720904, 3735552, 48, 786440, 3735552, 49, 851976, 3735552, 50, 655369, 3801088, 49, 720905, 3801088, 48, 786441, 3801088, 49, 851977, 3801088, 50, 393224, 3735552, 49, 458760, 3735552, 48, 524296, 3735552, 49, 589832, 3735552, 48, 393225, 3801088, 49, 458761, 3801088, 48, 524297, 3801088, 49, 589833, 3801088, 48, 131080, 3735552, 49, 196616, 3735552, 48, 262152, 3735552, 49, 327688, 3735552, 48, 131081, 3801088, 49, 196617, 3801088, 48, 262153, 3801088, 49, 327689, 3801088, 48, -131064, 3735552, 49, -65528, 3735552, 48, 8, 3735552, 49, 65544, 3735552, 48, -131063, 3801088, 49, -65527, 3801088, 48, 9, 3801088, 49, 65545, 3801088, 48, -393208, 3735552, 47, -327672, 3735552, 48, -262136, 3735552, 49, -196600, 3735552, 48, -393207, 3801088, 47, -327671, 3801088, 48, -262135, 3801088, 49, -196599, 3801088, 48, 655340, 3735552, 48, 720876, 3735552, 49, 786412, 3735552, 50, 589805, 3801088, 49, 655341, 3801088, 48, 720877, 3801088, 49, 786413, 3801088, 50, 458732, 3735552, 49, 524268, 3735552, 48, 458733, 3801088, 49, 524269, 3801088, 48, 589804, 3735552, 49)
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="TestEnemy" type="CharacterBody2D" parent="Enemies" groups=["Enemy"]]
-position = Vector2(755, 565)
-scale = Vector2(0.4, 0.4)
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemies/TestEnemy"]
-texture = ExtResource("6_l5d7u")
-
-[node name="Area2D" type="Area2D" parent="Enemies/TestEnemy"]
-position = Vector2(0, 2.5)
-scale = Vector2(1.4, 1.4)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/TestEnemy/Area2D"]
-scale = Vector2(0.896413, 0.919588)
-shape = SubResource("RectangleShape2D_6ylcd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/TestEnemy"]
-scale = Vector2(6.27444, 6.27444)
-shape = SubResource("RectangleShape2D_uoela")
 
 [node name="TestDummy" parent="Enemies" instance=ExtResource("7_kt7kw")]
 position = Vector2(903, 592)

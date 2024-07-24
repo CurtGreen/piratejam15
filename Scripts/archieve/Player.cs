@@ -183,7 +183,6 @@ public partial class Player : CharacterBody2D
 
 	public void _on_player_space_body_entered(Node2D body)
 	{
-		GD.Print("Collision Detected");
 		if (body.IsInGroup("Enemy"))
 		{
 			Velocity = new Vector2(Mathf.Sign(Velocity.X) * -1 * KnockBackForce, KnockBackForce * 0.8f * -1 );

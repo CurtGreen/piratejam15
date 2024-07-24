@@ -19,6 +19,5 @@ public partial class attack : Node
 			await ToSignal(character.GetTree().CreateTimer(attackCooldown), "timeout");
 			CanAttack = true;
 		}
-		
 	}
 }
