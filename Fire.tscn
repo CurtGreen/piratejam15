@@ -10,7 +10,7 @@ colors = PackedColorArray(0.985131, 0.906713, 0.474475, 1, 0.893517, 0.386756, 0
 gradient = SubResource("Gradient_pxblg")
 
 [sub_resource type="Curve" id="Curve_6ceer"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.787851), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_tobcm"]
@@ -21,9 +21,9 @@ lifetime_randomness = 0.31
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(10, 1, 1)
-gravity = Vector3(0, -98, 0)
-scale_min = 2.0
-scale_max = 2.0
+gravity = Vector3(0, -200, 0)
+scale_min = 4.0
+scale_max = 4.0
 scale_curve = SubResource("CurveTexture_tobcm")
 color_ramp = SubResource("GradientTexture1D_ni6f0")
 turbulence_enabled = true
@@ -37,11 +37,12 @@ z_index = 1
 script = ExtResource("1_dpis5")
 
 [node name="Flame" type="GPUParticles2D" parent="." groups=["Fire"]]
-amount = 200
+amount = 400
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
 [node name="Area2D" type="Area2D" parent="." groups=["Fire"]]
 z_index = 1
+scale = Vector2(0.04, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Fire"]]
 position = Vector2(0, -8)

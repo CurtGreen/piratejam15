@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy4vtbopuu5wm"]
+[gd_scene load_steps=13 format=3 uid="uid://dj7ptn6blrurc"]
 
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="1_mqxoo"]
 [ext_resource type="Texture2D" uid="uid://mltem3md6foa" path="res://Assets/Art/Cellar_TileMaps/SI_Cellar_Doors.png" id="2_hfric"]
