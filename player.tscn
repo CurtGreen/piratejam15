@@ -502,7 +502,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxet7"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(-1, -2)
 script = ExtResource("1_tetbr")
 PlayerSpritePath = NodePath("AnimatedSprite2D")

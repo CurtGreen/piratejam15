@@ -3511,8 +3511,9 @@ position = Vector2(1050, 539)
 DashForce = 800.0
 DashDuration = 0.3
 KnockBackForce = 400.0
-MoveType = 2
 JumpType = 0
+AttackType = 2
+DashType = 0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2, 40)
