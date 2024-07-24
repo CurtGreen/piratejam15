@@ -15,6 +15,15 @@ func handle_attack(character, attack_cooldown, attack_pressed, element, directio
 			fireball.direction = direction
 			await character.get_tree().create_timer(attack_cooldown).timeout
 			CanAttack = true
+		elif element == character.Element.WATER:
+			CanAttack = false
+			var scene = preload("res://Waterball.tscn")
+			var waterball = scene.instantiate() as Node2D
+			character.get_parent().add_child(waterball)
+			waterball.position = Vector2(character.position.x +(30*direction), character.position.y) # Adjust the position as needed
+			waterball.direction = direction
+			await character.get_tree().create_timer(attack_cooldown).timeout
+			CanAttack = true
 		else:
 			var attack_hitbox = character.get_node("BasicAttackCollider") as Area2D
 			attack_hitbox.monitorable = true

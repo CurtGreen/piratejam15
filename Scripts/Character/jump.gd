@@ -43,7 +43,7 @@ func apply_jump(move_direction, body, JumpForce, jump_direction=JumpDirections.U
 		body.velocity = Vector2(body.velocity.x + JumpForce * -move_direction.x, 0)
 		wallJump = false
 
-	body.velocity = Vector2(body.velocity.x, body.velocity.y + JumpForce * int(jump_direction))
+	body.velocity = Vector2(body.velocity.x, JumpForce * int(jump_direction))
 
 func cancel_jump(delta, body, JumpCancelForce):
 	jumping = false

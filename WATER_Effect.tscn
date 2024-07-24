@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1dq2ngakw8hh"]
+
+[ext_resource type="Script" path="res://Part_effect_texture.gd" id="1_t4qcb"]
+
+[node name="WET" type="CPUParticles2D"]
+z_index = 2
+amount = 25
+lifetime = 0.3
+emission_shape = 4
+emission_points = PackedVector2Array()
+emission_colors = PackedColorArray()
+color = Color(0.184314, 0.623529, 1, 1)
+script = ExtResource("1_t4qcb")

@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://dd2qy5ixgtsp1"]
+
+[ext_resource type="Script" path="res://Scripts/Other/waterball.gd" id="1_pfrw3"]
+
+[sub_resource type="Gradient" id="Gradient_pxblg"]
+offsets = PackedFloat32Array(0, 0.508217, 1)
+colors = PackedColorArray(0, 0.223754, 0.462075, 1, 5.58317e-06, 0.731068, 0.915778, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ni6f0"]
+gradient = SubResource("Gradient_pxblg")
+
+[sub_resource type="Curve" id="Curve_6ceer"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.953602, 0.0206254), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tobcm"]
+curve = SubResource("Curve_6ceer")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f4nyj"]
+lifetime_randomness = 0.31
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 0.0
+gravity = Vector3(0, 200, 0)
+radial_accel_min = 3.79
+radial_accel_max = 42.41
+tangential_accel_min = 37.8
+tangential_accel_max = 37.85
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_tobcm")
+color_ramp = SubResource("GradientTexture1D_ni6f0")
+turbulence_enabled = true
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.935
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we12h"]
+radius = 10.7143
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_220l6"]
+
+[node name="Waterball" type="CharacterBody2D" groups=["Damage", "Water"]]
+z_index = 1
+script = ExtResource("1_pfrw3")
+
+[node name="Water" type="GPUParticles2D" parent="." groups=["Damage", "Water"]]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_f4nyj")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Damage", "Water"]]
+visible = false
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Damage", "Water"]]
+scale = Vector2(0.279999, 0.439999)
+shape = SubResource("CircleShape2D_we12h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Damage", "Water"]]
+visible = false
+scale = Vector2(0.206013, 0.206013)
+shape = SubResource("CircleShape2D_220l6")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

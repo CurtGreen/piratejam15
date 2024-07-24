@@ -17,11 +17,11 @@ height = 64.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CapsuleShape2D_otm2o")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-texture = ExtResource("1_k1etm")
-
 [node name="Area2D" type="Area2D" parent="RigidBody2D"]
 
 [node name="DamagePlayer" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
 position = Vector2(0.5, -3)
 shape = SubResource("CapsuleShape2D_6ti7t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k1etm")
