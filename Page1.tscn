@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="1_8eva8"]
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="1_ln4mf"]
-[ext_resource type="PackedScene" uid="uid://cp307t6j20h8i" path="res://Clutter_Animated/door.tscn" id="2_n2ddx"]
+[ext_resource type="PackedScene" path="res://Clutter_Animated/door.tscn" id="2_n2ddx"]
 [ext_resource type="PackedScene" uid="uid://diq77ld1vcomu" path="res://Clutter_Animated/spikes.tscn" id="5_i0um8"]
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://test_dummy.tscn" id="5_ve2gf"]
 [ext_resource type="Texture2D" uid="uid://ddgybhocm4o1p" path="res://icon.svg" id="6_jpgbr"]
@@ -52,7 +52,14 @@ layer_0/tile_data = PackedInt32Array(2555940, 2162688, 41, 2621476, 2162688, 42,
 [node name="Player" parent="." instance=ExtResource("1_ln4mf")]
 z_index = 5
 position = Vector2(1028, 537)
+JumpForce = 350.0
+DashCooldown = 1.0
+DashForce = 400.0
+DashDuration = 0.75
+MoveType = 2
 JumpType = 0
+AttackType = 2
+DashType = 0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
