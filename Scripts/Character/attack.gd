@@ -5,6 +5,7 @@ var AttackTimer = 0.3
 
 func handle_attack(character, attack_cooldown, attack_pressed, element, direction):
 	if CanAttack and attack_pressed:
+		character.state = character.CharacterState.ATTACK
 		if element == character.Element.FIRE:
 			CanAttack = false
 			var scene = preload("res://Fireball.tscn")
