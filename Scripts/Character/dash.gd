@@ -15,9 +15,9 @@ func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDura
 		dashing = true
 		dashCount += 1
 		if element == body.Element.EARTH:
-			body.velocity = Vector2(DashForce * 1.0 * move_direction.x, DashForce * 0.8 * -1)
+			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 0.8 * -1)
 		else:
-			body.velocity = Vector2(DashForce * move_direction.x, body.velocity.y)
+			body.velocity = Vector2(DashForce * move_direction, body.velocity.y)
 
 		# Optionally: Play dash animation here
 		await body.get_tree().create_timer(DashDuration).timeout

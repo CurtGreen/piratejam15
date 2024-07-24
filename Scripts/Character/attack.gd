@@ -3,14 +3,24 @@ extends Node
 var CanAttack = true
 var AttackTimer = 0.3
 
-func handle_attack(character, attack_cooldown, attack_pressed):
+func handle_attack(character, attack_cooldown, attack_pressed, element, direction):
 	if CanAttack and attack_pressed:
-		var attack_hitbox = character.get_node("BasicAttackCollider") as Area2D
-		attack_hitbox.monitorable = true
-		attack_hitbox.monitoring = true
-		CanAttack = false
-		await character.get_tree().create_timer(AttackTimer).timeout
-		attack_hitbox.monitorable = false
-		attack_hitbox.monitoring = false
-		await character.get_tree().create_timer(attack_cooldown).timeout
-		CanAttack = true
+		if element == character.Element.FIRE:
+			CanAttack = false
+			var scene = preload("res://Fireball.tscn")
+			var fireball = scene.instantiate() as Node2D
+			character.get_parent().add_child(fireball)
+			fireball.position = Vector2(character.position.x +(30*direction), character.position.y) # Adjust the position as needed
+			fireball.direction = direction
+			await character.get_tree().create_timer(attack_cooldown).timeout
+			CanAttack = true
+		else:
+			var attack_hitbox = character.get_node("BasicAttackCollider") as Area2D
+			attack_hitbox.monitorable = true
+			attack_hitbox.monitoring = true
+			CanAttack = false
+			await character.get_tree().create_timer(AttackTimer).timeout
+			attack_hitbox.monitorable = false
+			attack_hitbox.monitoring = false
+			await character.get_tree().create_timer(attack_cooldown).timeout
+			CanAttack = true

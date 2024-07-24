@@ -43,6 +43,7 @@ var AP : AnimationPlayer
 @export var AttackType = Element.NONE
 @export var DashType = Element.NONE
 
+var last_facing = 1
 var state = CharacterState.IDLE
 var canWallJump
 var canAttack = true
@@ -69,12 +70,16 @@ func _physics_process(delta):
 
 func _physics_tick(delta):
 	var inputs = get_inputs()
+	if(inputs.input_direction.x != 0 && inputs.input_direction.x != last_facing):
+		last_facing = inputs.input_direction.x
+		print(last_facing)
+	
 	jump_script.handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released, self, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType)
-	dash_script.handle_dash(delta, inputs.input_direction, inputs.dash_pressed, self, DashForce, DashDuration, DashCooldown, DashType)
+	dash_script.handle_dash(delta, last_facing, inputs.dash_pressed, self, DashForce, DashDuration, DashCooldown, DashType)
 	if not dash_script.dashing:
 		move_script.handle_velocity(delta, inputs.input_direction, self, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType)
 	jump_script.handle_gravity(delta, self, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer)
-	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed)
+	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed, AttackType, last_facing)
 	manage_animations()
 	manage_state()
 	move_and_slide()

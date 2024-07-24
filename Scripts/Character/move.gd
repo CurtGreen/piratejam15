@@ -20,12 +20,12 @@ func handle_velocity(delta, input_direction, body, dashing, Acceleration, MaxSpe
 			fire.position = Vector2(body.position.x, body.position.y + 30) # Adjust the position as needed
 
 func apply_velocity(delta, move_direction, body, dashing, Acceleration, MaxSpeed, element):
-	body.velocity.x += body.velocity.x + move_direction.x * Acceleration * delta
+	body.velocity.x = body.velocity.x + move_direction.x * Acceleration * delta
 	if not dashing:
 		if element == body.Element.AIR:
-			body.velocity.x = clamp(body.velocity.x, -MaxSpeed * 1.5 * abs(move_direction.x), MaxSpeed * 1.5 * abs(move_direction.x))
+			body.velocity.x = clamp(body.velocity.x, -MaxSpeed * 1.5, MaxSpeed * 1.5)
 		else:
-			body.velocity.x = clamp(body.velocity.x, -MaxSpeed * abs(move_direction.x), MaxSpeed * abs(move_direction.x))
+			body.velocity.x = clamp(body.velocity.x, -MaxSpeed, MaxSpeed)
 
 func apply_friction(delta, body, Friction, AirResistance):
 	var fric
