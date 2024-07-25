@@ -15,9 +15,15 @@ func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDura
 		dashing = true
 		dashCount += 1
 		if element == body.Element.EARTH:
-			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 0.8 * -1)
+			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 1.5 * -1)
 		else:
 			body.velocity = Vector2(DashForce * move_direction, body.velocity.y)
+			var scene = preload("res://DASH_Effect.tscn")
+			var dashEffect = scene.instantiate() as Node2D
+			body.add_child(dashEffect)
+			dashEffect.process_material.direction.x = -100 * move_direction
+			dashEffect.position = Vector2((-30*move_direction), 0) # Adjust the position as needed
+
 
 		# Optionally: Play dash animation here
 		await body.get_tree().create_timer(DashDuration).timeout

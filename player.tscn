@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dxwf54h6mqpr3"]
+[gd_scene load_steps=47 format=3 uid="uid://dxwf54h6mqpr3"]
 
 [ext_resource type="Script" path="res://Scripts/Character/player.gd" id="1_tetbr"]
 [ext_resource type="Texture2D" uid="uid://ce758f2sajg78" path="res://Assets/Art/Player/player_idle.png" id="2_vsqsm"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c02hfi8by31w8" path="res://Assets/Art/Player/player_jump.png" id="4_j248j"]
 [ext_resource type="Texture2D" uid="uid://pxhfbeccyy6b" path="res://Assets/Art/Player/player_dash.png" id="5_2l56h"]
 [ext_resource type="Texture2D" uid="uid://bog63w36tglxd" path="res://Assets/Art/Player/player_injuryanddeath.png" id="5_xlywo"]
-[ext_resource type="PackedScene" uid="uid://itok1sdmmk5k" path="res://FIRE_Effect.tscn" id="9_jxsps"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3lhg"]
 radius = 18.0
@@ -536,8 +535,6 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpace"]
 scale = Vector2(2.28, 2.28)
 shape = SubResource("CapsuleShape2D_wxet7")
-
-[node name="FLAMES" parent="." instance=ExtResource("9_jxsps")]
 
 [connection signal="area_entered" from="BasicAttackCollider" to="." method="_on_basic_attack_collider_area_entered"]
 [connection signal="body_entered" from="BasicAttackCollider" to="." method="_on_basic_attack_collider_body_entered"]
