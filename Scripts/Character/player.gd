@@ -5,6 +5,10 @@ enum Element { AIR, EARTH, FIRE, WATER, NONE }
 
 @export var PlayerHealth = 5
 @export var MaxPlayerHealth = 5
+@export var PlayerFireResource = 100
+@export var PlayerWaterResource = 100
+@export var PlayerAirResource = 100
+@export var PlayerEarthResource = 100
 
 @export var PlayerSpritePath : NodePath
 @export var AnimationPlayerPath : NodePath
@@ -150,10 +154,70 @@ func get_input_direction() -> Vector2:
 	else:
 		return Vector2(sign(xDir), sign(yDir))
 
+func do_take_damage(amt):
+	state = CharacterState.HURT
+	PlayerHealth -= amt
+	if PlayerHealth == 5:
+		$Camera2D/HealthBar/HP5.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP4.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	if PlayerHealth == 4:
+		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP4.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	if PlayerHealth == 3:
+		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	if PlayerHealth == 2:
+		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP3.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
+		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	if PlayerHealth == 1:
+		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP3.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP2.modulate = Color(0,0,0,1)
+		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	if PlayerHealth == 0:
+		#die!
+		do_take_damage(-5)
+
+func change_element(element, amount):
+	if element == Element.FIRE:
+		PlayerFireResource += amount
+	if element == Element.AIR:
+		PlayerAirResource += amount
+	if element == Element.WATER:
+		PlayerWaterResource += amount
+	if element == Element.EARTH:
+		PlayerEarthResource += amount
+	clamp(PlayerFireResource, 0,100)
+	clamp(PlayerAirResource, 0,100)
+	clamp(PlayerWaterResource, 0,100)
+	clamp(PlayerEarthResource, 0,100)
+	$Camera2D/ResourceBar/Fire.scale.x = float(PlayerFireResource)/100
+	$Camera2D/ResourceBar/Air.scale.x = float(PlayerAirResource)/100
+	$Camera2D/ResourceBar/Water.scale.x = float(PlayerWaterResource)/100
+	$Camera2D/ResourceBar/Earth.scale.x = float(PlayerEarthResource)/100
+	
+		
+
 func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("Enemy"):
 		velocity = Vector2(sign(velocity.x) * -1 * KnockBackForce, KnockBackForce * 0.8 * -1)
-		state = CharacterState.HURT
-
+		do_take_damage(1)
+	if body.is_in_group("HurtPlayer"):
+		do_take_damage(1)
+		body.queue_free()
+	
 func _on_animation_player_animation_finished(anim_name: String):
 	manage_state()

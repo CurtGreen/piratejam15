@@ -18,6 +18,8 @@ func handle_jump(delta, move_direction, jump_strength, jump_pressed, _jump_relea
 	if (jump_pressed or shouldJump) and (canJump or jumpCount < maxJumps):
 		apply_jump(move_direction, body, JumpForce, JumpDirections.UP)
 		jumpCount += 1
+		if jumpCount == 2:
+			body.change_element(body.Element.AIR, -10)
 	elif jump_pressed:
 		buffer_jump(JumpBufferTimer, body)
 	elif jump_strength == 0 and body.velocity.y < 0:
