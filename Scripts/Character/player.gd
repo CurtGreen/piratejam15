@@ -170,17 +170,17 @@ func do_take_damage(amt):
 func change_element(element, amount):
 	if element == Element.FIRE:
 		PlayerFireResource += amount
-	if element == Element.AIR:
+	elif element == Element.AIR:
 		PlayerAirResource += amount
-	if element == Element.WATER:
+	elif element == Element.WATER:
 		PlayerWaterResource += amount
-	if element == Element.EARTH:
+	elif element == Element.EARTH:
 		PlayerEarthResource += amount
 	clamp(PlayerFireResource, 0,100)
 	clamp(PlayerAirResource, 0,100)
 	clamp(PlayerWaterResource, 0,100)
 	clamp(PlayerEarthResource, 0,100)
-	resource_modified.emit(PlayerAirResource, PlayerEarthResource, PlayerFireResource, PlayerWaterResource)
+	resource_modified.emit(PlayerFireResource, PlayerAirResource, PlayerWaterResource, PlayerEarthResource)
 	
 func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("Enemy"):
