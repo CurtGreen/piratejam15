@@ -8,12 +8,15 @@ var maxDashes = 2
 func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDuration, DashCooldown, element):
 	if element == body.Element.AIR:
 		maxDashes = 2
+		
 	else:
 		maxDashes = 1
 
 	if dash_pressed and canDash and not dashing and dashCount < maxDashes:
 		dashing = true
 		dashCount += 1
+		if element == body.Element.AIR:
+			body.change_element(body.Element.AIR, -10)
 		if element == body.Element.EARTH:
 			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 1.5 * -1)
 		else:

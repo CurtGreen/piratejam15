@@ -1,28 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bnnj24wupeuc0"]
+[gd_scene load_steps=15 format=3 uid="uid://bnnj24wupeuc0"]
 
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="1_mqxoo"]
-[ext_resource type="Texture2D" uid="uid://qr8wbh1gqqin" path="res://Assets/Art/UI/Heart.png" id="2_26anm"]
-[ext_resource type="PackedScene" path="res://Clutter_Animated/door.tscn" id="2_g7360"]
-[ext_resource type="Texture2D" uid="uid://bi4cnnse8htlj" path="res://Assets/Art/UI/ResourceUI.png" id="3_648ly"]
+[ext_resource type="PackedScene" uid="uid://cp307t6j20h8i" path="res://Clutter_Animated/door.tscn" id="2_g7360"]
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="4_lsm8i"]
 [ext_resource type="PackedScene" uid="uid://diq77ld1vcomu" path="res://Clutter_Animated/spikes.tscn" id="5_4janj"]
 [ext_resource type="Texture2D" uid="uid://ddgybhocm4o1p" path="res://icon.svg" id="6_x504r"]
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://test_dummy.tscn" id="7_kt7kw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxet5"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jodv"]
-bg_color = Color(0.713726, 0.054902, 0.0509804, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jackw"]
-bg_color = Color(0.415686, 0.870588, 0.552941, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uskaq"]
-bg_color = Color(0.0941176, 0.270588, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ooic0"]
-bg_color = Color(0.666667, 0.368627, 0.192157, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0m8ac"]
 size = Vector2(203, 20)
@@ -57,115 +40,6 @@ DashDuration = 0.75
 JumpType = 0
 AttackType = 2
 DashType = 0
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -16)
-zoom = Vector2(2.1, 2.1)
-
-[node name="HealthBar" type="HBoxContainer" parent="Player/Camera2D"]
-z_index = 1
-layout_direction = 2
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -147.0
-offset_right = -174.0
-offset_bottom = -135.0
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="HP1" type="TextureRect" parent="Player/Camera2D/HealthBar"]
-layout_mode = 2
-texture = ExtResource("2_26anm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="HP2" type="TextureRect" parent="Player/Camera2D/HealthBar"]
-layout_mode = 2
-texture = ExtResource("2_26anm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="HP3" type="TextureRect" parent="Player/Camera2D/HealthBar"]
-layout_mode = 2
-texture = ExtResource("2_26anm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="HP4" type="TextureRect" parent="Player/Camera2D/HealthBar"]
-layout_mode = 2
-texture = ExtResource("2_26anm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="HP5" type="TextureRect" parent="Player/Camera2D/HealthBar"]
-layout_mode = 2
-texture = ExtResource("2_26anm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="ResourceBar" type="TextureRect" parent="Player/Camera2D"]
-offset_left = -259.0
-offset_top = -134.0
-offset_right = -170.0
-offset_bottom = -83.0
-texture = ExtResource("3_648ly")
-expand_mode = 1
-
-[node name="Fire" type="ProgressBar" parent="Player/Camera2D/ResourceBar"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 4.0
-offset_right = 83.0
-offset_bottom = 15.0
-theme_override_styles/background = SubResource("StyleBoxFlat_kxet5")
-theme_override_styles/fill = SubResource("StyleBoxFlat_4jodv")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="Air" type="ProgressBar" parent="Player/Camera2D/ResourceBar"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 15.0
-offset_right = 83.0
-offset_bottom = 25.0
-theme_override_styles/background = SubResource("StyleBoxFlat_kxet5")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jackw")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="Water" type="ProgressBar" parent="Player/Camera2D/ResourceBar"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 26.0
-offset_right = 83.0
-offset_bottom = 36.0
-theme_override_styles/background = SubResource("StyleBoxFlat_kxet5")
-theme_override_styles/fill = SubResource("StyleBoxFlat_uskaq")
-step = 1.0
-value = 100.0
-show_percentage = false
-
-[node name="Earth" type="ProgressBar" parent="Player/Camera2D/ResourceBar"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 19.0
-offset_top = 36.0
-offset_right = 84.0
-offset_bottom = 47.0
-theme_override_styles/background = SubResource("StyleBoxFlat_kxet5")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ooic0")
-step = 1.0
-value = 100.0
-show_percentage = false
 
 [node name="TestDummy" parent="." instance=ExtResource("7_kt7kw")]
 z_index = 1

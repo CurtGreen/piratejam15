@@ -53,16 +53,8 @@ position = Vector2(431, -19)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_gie44")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(344, 137)
-zoom = Vector2(2, 2)
-limit_left = 0
-limit_top = 0
-limit_right = 550
-limit_bottom = 550
-
 [node name="Player" parent="." instance=ExtResource("2_ehdyi")]
-position = Vector2(62, 58)
+position = Vector2(187, 128)
 Friction = 2000.0
 DashCooldown = 1.0
 DashForce = 400.0
