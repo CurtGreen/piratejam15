@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dst42jp6dno4y"]
 
-[ext_resource type="Script" path="res://Scripts/Other/DASH_Effect.gd" id="1_ak8x7"]
+[ext_resource type="Script" path="res://Scripts/Effects/DASH_Effect.gd" id="1_ak8x7"]
 
 [sub_resource type="Gradient" id="Gradient_xsp0c"]
 colors = PackedColorArray(1, 1, 1, 1, 0.541176, 0.541176, 0.541176, 0.431373)

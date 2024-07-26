@@ -14,7 +14,7 @@ func handle_velocity(delta, input_direction, body, dashing, Acceleration, MaxSpe
 				inFire = true
 				break
 		if not inFire:
-			var scene = preload("res://Fire.tscn")
+			var scene = preload("res://Scenes/Effects/Fire.tscn")
 			var fire = scene.instantiate() as Node2D
 			body.get_parent().add_child(fire)
 			fire.position = Vector2(body.position.x, body.position.y + 30) # Adjust the position as needed
