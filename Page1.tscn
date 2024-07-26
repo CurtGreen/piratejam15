@@ -61,7 +61,7 @@ JumpType = 0
 AttackType = 2
 DashType = 0
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D2" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
 zoom = Vector2(2.1, 2.1)
 
