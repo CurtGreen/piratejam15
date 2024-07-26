@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://c36icjw27505w"]
 
 [ext_resource type="Texture2D" uid="uid://bi4cnnse8htlj" path="res://Assets/Art/UI/ResourceUI.png" id="1_0s45n"]
-[ext_resource type="Script" path="res://ResourceBar.gd" id="2_6snou"]
-[ext_resource type="Script" path="res://HealthBar.gd" id="3_55g3e"]
+[ext_resource type="Script" path="res://Scripts/UI/ResourceBar.gd" id="2_6snou"]
+[ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_8i1ko"]
 [ext_resource type="Texture2D" uid="uid://qr8wbh1gqqin" path="res://Assets/Art/UI/Heart.png" id="4_sxiub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxugu"]
@@ -98,7 +98,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
-script = ExtResource("3_55g3e")
+script = ExtResource("3_8i1ko")
 
 [node name="HP1" type="TextureRect" parent="HealthBar"]
 layout_mode = 2

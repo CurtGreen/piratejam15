@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dd2qy5ixgtsp1"]
 
-[ext_resource type="Script" path="res://Scripts/Other/waterball.gd" id="1_pfrw3"]
+[ext_resource type="Script" path="res://Scripts/Effects/waterball.gd" id="1_pfrw3"]
 
 [sub_resource type="Gradient" id="Gradient_pxblg"]
 offsets = PackedFloat32Array(0, 0.508217, 1)

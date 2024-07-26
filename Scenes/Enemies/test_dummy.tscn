@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://vbkjt3eig0p0"]
 
 [ext_resource type="Texture2D" uid="uid://bvnm4cfqq57c7" path="res://Assets/Art/Enemies/test_dummy.png" id="1_k1etm"]
-[ext_resource type="PackedScene" path="res://WATER_Effect.tscn" id="2_26rn3"]
+[ext_resource type="PackedScene" uid="uid://d1dq2ngakw8hh" path="res://Scenes/Effects/WATER_Effect.tscn" id="2_26rn3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otm2o"]
 radius = 16.0

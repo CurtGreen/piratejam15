@@ -21,7 +21,7 @@ func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDura
 			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 1.5 * -1)
 		else:
 			body.velocity = Vector2(DashForce * move_direction, body.velocity.y)
-			var scene = preload("res://DASH_Effect.tscn")
+			var scene = preload("res://Scenes/Effects/DASH_Effect.tscn")
 			var dashEffect = scene.instantiate() as Node2D
 			body.add_child(dashEffect)
 			dashEffect.process_material.direction.x = -100 * move_direction

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1dq2ngakw8hh"]
 
-[ext_resource type="Script" path="res://Part_effect_texture.gd" id="1_t4qcb"]
+[ext_resource type="Script" path="res://Scripts/Effects/Part_effect_texture.gd" id="1_t4qcb"]
 
 [node name="WET" type="CPUParticles2D"]
 z_index = 2
