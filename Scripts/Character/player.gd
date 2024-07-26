@@ -3,6 +3,9 @@ extends CharacterBody2D
 enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH, HURT, DEATH }
 enum Element { AIR, EARTH, FIRE, WATER, NONE }
 
+signal damage_taken
+signal resource_modified
+
 @export var PlayerHealth = 5
 @export var MaxPlayerHealth = 5
 @export var PlayerFireResource = 100
@@ -159,42 +162,8 @@ func get_input_direction() -> Vector2:
 func do_take_damage(amt):
 	state = CharacterState.HURT
 	PlayerHealth -= amt
-	if PlayerHealth == 5:
-		$Camera2D/HealthBar/HP5.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
-	if PlayerHealth == 4:
-		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
-	if PlayerHealth == 3:
-		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
-	if PlayerHealth == 2:
-		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(1,1,1,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
-	if PlayerHealth == 1:
-		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(1,1,1,1)
+	damage_taken.emit(PlayerHealth)
 	if PlayerHealth == 0:
-		$Camera2D/HealthBar/HP5.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP4.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP3.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP2.modulate = Color(0,0,0,1)
-		$Camera2D/HealthBar/HP1.modulate = Color(0,0,0,1)
 		state = CharacterState.DEATH
 
 
@@ -211,10 +180,7 @@ func change_element(element, amount):
 	clamp(PlayerAirResource, 0,100)
 	clamp(PlayerWaterResource, 0,100)
 	clamp(PlayerEarthResource, 0,100)
-	$Camera2D/ResourceBar/Fire.value = PlayerFireResource
-	$Camera2D/ResourceBar/Air.value = PlayerAirResource
-	$Camera2D/ResourceBar/Water.value = PlayerWaterResource
-	$Camera2D/ResourceBar/Earth.value = PlayerEarthResource
+	resource_modified.emit(PlayerAirResource, PlayerEarthResource, PlayerFireResource, PlayerWaterResource)
 	
 func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("Enemy"):
