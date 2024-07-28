@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=3 uid="uid://c36icjw27505w"]
+
+[ext_resource type="Texture2D" uid="uid://bi4cnnse8htlj" path="res://Assets/Art/UI/ResourceUI.png" id="1_0s45n"]
+[ext_resource type="Script" path="res://Scripts/UI/ResourceBar.gd" id="2_6snou"]
+[ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_8i1ko"]
+[ext_resource type="Texture2D" uid="uid://qr8wbh1gqqin" path="res://Assets/Art/UI/Heart.png" id="4_sxiub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxugu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hxqx"]
+bg_color = Color(0.713726, 0.054902, 0.0509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b518d"]
+bg_color = Color(0.415686, 0.870588, 0.552941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2udl"]
+bg_color = Color(0.0941176, 0.270588, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqtax"]
+bg_color = Color(0.666667, 0.368627, 0.192157, 1)
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+
+[node name="ResourceBar" type="TextureRect" parent="."]
+offset_left = 17.0
+offset_top = 27.0
+offset_right = 106.0
+offset_bottom = 78.0
+texture = ExtResource("1_0s45n")
+expand_mode = 1
+script = ExtResource("2_6snou")
+
+[node name="Fire" type="ProgressBar" parent="ResourceBar"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 83.0
+offset_bottom = 15.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fxugu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8hxqx")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Air" type="ProgressBar" parent="ResourceBar"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 83.0
+offset_bottom = 25.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fxugu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b518d")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Water" type="ProgressBar" parent="ResourceBar"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 26.0
+offset_right = 83.0
+offset_bottom = 36.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fxugu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2udl")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Earth" type="ProgressBar" parent="ResourceBar"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 19.0
+offset_top = 36.0
+offset_right = 84.0
+offset_bottom = 47.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fxugu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mqtax")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="HBoxContainer" parent="."]
+z_index = 1
+layout_direction = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = -310.0
+offset_right = 102.0
+offset_bottom = -298.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("3_8i1ko")
+
+[node name="HP1" type="TextureRect" parent="HealthBar"]
+layout_mode = 2
+texture = ExtResource("4_sxiub")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HP2" type="TextureRect" parent="HealthBar"]
+layout_mode = 2
+texture = ExtResource("4_sxiub")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HP3" type="TextureRect" parent="HealthBar"]
+layout_mode = 2
+texture = ExtResource("4_sxiub")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HP4" type="TextureRect" parent="HealthBar"]
+layout_mode = 2
+texture = ExtResource("4_sxiub")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HP5" type="TextureRect" parent="HealthBar"]
+layout_mode = 2
+texture = ExtResource("4_sxiub")
+expand_mode = 2
+stretch_mode = 4

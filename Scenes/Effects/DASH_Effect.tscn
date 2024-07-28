@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dst42jp6dno4y"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/DASH_Effect.gd" id="1_ak8x7"]
+
+[sub_resource type="Gradient" id="Gradient_xsp0c"]
+colors = PackedColorArray(1, 1, 1, 1, 0.541176, 0.541176, 0.541176, 0.431373)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rfmfs"]
+gradient = SubResource("Gradient_xsp0c")
+
+[sub_resource type="Curve" id="Curve_wamox"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bfh6v"]
+curve = SubResource("Curve_wamox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y6oxe"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 20, 1)
+direction = Vector3(-1, 0, 0)
+initial_velocity_max = 255.88
+radial_velocity_min = -847.06
+radial_velocity_max = -217.65
+gravity = Vector3(100, 0, 0)
+linear_accel_max = 10.0
+linear_accel_curve = SubResource("CurveTexture_bfh6v")
+scale_min = 0.5
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_rfmfs")
+
+[node name="Dash" type="GPUParticles2D"]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_y6oxe")
+script = ExtResource("1_ak8x7")

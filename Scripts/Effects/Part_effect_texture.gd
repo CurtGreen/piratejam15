@@ -14,9 +14,7 @@ func _ready():
 		#img_tex = img_tex.create_from_image(textureAtlas.atlas.get_image());
 		var img_tex = textureAtlas.atlas.get_image()
 		var msize = img_tex.get_size()
-		print(msize)
 		for i in range(textureAtlas.region.position.x, textureAtlas.region.end.x):
-			print(i)
 			for j in range(textureAtlas.region.position.y, textureAtlas.region.end.y):
 				if img_tex.get_pixel(i,j).a != 0:
 					newEmission.push_back(Vector2(i-(textureAtlas.region.size.x/2),j-(textureAtlas.region.size.y/2)))

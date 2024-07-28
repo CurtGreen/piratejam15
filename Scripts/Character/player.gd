@@ -1,10 +1,17 @@
 extends CharacterBody2D
 
-enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH, HURT }
+enum CharacterState { IDLE, WALK, JUMP, FALL, WALL_SLIDE, ATTACK, DASH, HURT, DEATH }
 enum Element { AIR, EARTH, FIRE, WATER, NONE }
+
+signal damage_taken
+signal resource_modified
 
 @export var PlayerHealth = 5
 @export var MaxPlayerHealth = 5
+@export var PlayerFireResource = 100
+@export var PlayerWaterResource = 100
+@export var PlayerAirResource = 100
+@export var PlayerEarthResource = 100
 
 @export var PlayerSpritePath : NodePath
 @export var AnimationPlayerPath : NodePath
@@ -72,7 +79,6 @@ func _physics_tick(delta):
 	var inputs = get_inputs()
 	if(inputs.input_direction.x != 0 && inputs.input_direction.x != last_facing):
 		last_facing = inputs.input_direction.x
-		#print(last_facing)
 	
 	jump_script.handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released, self, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType)
 	dash_script.handle_dash(delta, last_facing, inputs.dash_pressed, self, DashForce, DashDuration, DashCooldown, DashType)
@@ -81,7 +87,8 @@ func _physics_tick(delta):
 	jump_script.handle_gravity(delta, self, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer)
 	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed, AttackType, last_facing)
 	manage_animations()
-	move_and_slide()
+	if(state != CharacterState.DEATH):
+		move_and_slide()
 
 func blocking_state():
 	var block := false
@@ -111,6 +118,8 @@ func manage_animations():
 	PlayerSprite.set_flip_h(last_facing < 0)
 
 	match state:
+		CharacterState.DEATH:
+			AP.play("Death")
 		CharacterState.HURT:
 			AP.play("Hurt")
 		CharacterState.ATTACK:
@@ -150,10 +159,40 @@ func get_input_direction() -> Vector2:
 	else:
 		return Vector2(sign(xDir), sign(yDir))
 
+func do_take_damage(amt):
+	state = CharacterState.HURT
+	PlayerHealth -= amt
+	damage_taken.emit(PlayerHealth)
+	if PlayerHealth == 0:
+		state = CharacterState.DEATH
+
+
+func change_element(element, amount):
+	if element == Element.FIRE:
+		PlayerFireResource += amount
+	elif element == Element.AIR:
+		PlayerAirResource += amount
+	elif element == Element.WATER:
+		PlayerWaterResource += amount
+	elif element == Element.EARTH:
+		PlayerEarthResource += amount
+	clamp(PlayerFireResource, 0,100)
+	clamp(PlayerAirResource, 0,100)
+	clamp(PlayerWaterResource, 0,100)
+	clamp(PlayerEarthResource, 0,100)
+	resource_modified.emit(PlayerFireResource, PlayerAirResource, PlayerWaterResource, PlayerEarthResource)
+	
 func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("Enemy"):
 		velocity = Vector2(sign(velocity.x) * -1 * KnockBackForce, KnockBackForce * 0.8 * -1)
-		state = CharacterState.HURT
-
+		do_take_damage(1)
+	if body.is_in_group("HurtPlayer"):
+		do_take_damage(1)
+		body.queue_free()
+	
 func _on_animation_player_animation_finished(anim_name: String):
-	manage_state()
+	if(not state == CharacterState.DEATH):
+		manage_state()
+	elif state == CharacterState.DEATH:
+		disable_mode = CollisionObject2D.DISABLE_MODE_MAKE_STATIC
+		process_mode = Node.PROCESS_MODE_DISABLED
