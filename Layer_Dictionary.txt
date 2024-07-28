@@ -1,0 +1,6 @@
+Collision Layers
+	1:
+Collision Mask
+
+Physics Layers
+

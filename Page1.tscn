@@ -56,14 +56,7 @@ JumpForce = 350.0
 DashCooldown = 1.0
 DashForce = 400.0
 DashDuration = 0.75
-MoveType = 2
 JumpType = 0
-AttackType = 2
-DashType = 0
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -16)
-zoom = Vector2(2.1, 2.1)
 
 [node name="Litter_Foreground" type="TileMap" parent="."]
 z_index = 100
@@ -119,6 +112,7 @@ position = Vector2(-273, 542)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0m8ac")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
 scale = Vector2(1.61, 0.215)
@@ -129,6 +123,7 @@ position = Vector2(-620, 454)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_0m8ac")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
 scale = Vector2(1.61, 0.215)
@@ -140,6 +135,7 @@ position = Vector2(-976, 348)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_0m8ac")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
 scale = Vector2(1.61, 0.215)
@@ -151,6 +147,7 @@ position = Vector2(-529, 210)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_0m8ac")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D6"]
 scale = Vector2(1.61, 0.215)
@@ -162,6 +159,7 @@ position = Vector2(41, 120)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_0m8ac")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D7"]
 scale = Vector2(1.61, 0.215)
