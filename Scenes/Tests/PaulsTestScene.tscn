@@ -156,7 +156,6 @@ layer_0/tile_data = PackedInt32Array(2359357, 1441792, 40, 2424893, 1441792, 41,
 
 [node name="Player" parent="." instance=ExtResource("6_wjb5q")]
 position = Vector2(1006, 516)
-Friction = 2000.0
 JumpType = 0
 AttackType = 3
 DashType = 0

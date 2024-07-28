@@ -5,7 +5,7 @@ var canDash = true
 var dashCount = 0
 var maxDashes = 2
 
-func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDuration, DashCooldown, element):
+func handle_dash(delta, move_direction, dash_pressed, body, DashForce, DashDuration, DashCooldown, element):
 	if element == body.Element.AIR:
 		maxDashes = 2
 		
@@ -18,7 +18,7 @@ func handle_dash(_delta, move_direction, dash_pressed, body, DashForce, DashDura
 		if element == body.Element.AIR:
 			body.change_element(body.Element.AIR, -10)
 		if element == body.Element.EARTH:
-			body.velocity = Vector2(DashForce * 1.0 * move_direction, DashForce * 1.5 * -1)
+			body.velocity = Vector2(DashForce * move_direction, -1 * DashForce * 1.5 )
 		else:
 			body.velocity = Vector2(DashForce * move_direction, body.velocity.y)
 			var scene = preload("res://Scenes/Effects/DASH_Effect.tscn")

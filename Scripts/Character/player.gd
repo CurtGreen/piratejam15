@@ -32,18 +32,19 @@ var AP : AnimationPlayer
 
 @export var Acceleration = 200.0
 @export var MaxSpeed = 200.0
-@export var Friction = 1000.0
-@export var AirResistance = 200.0
-@export var Gravity = 900.0
+#Friction and AirResistance need to be scalar values between 0.0 and 1.0 otherwise they break the lerp function
+@export var Friction = 0.5
+@export var AirResistance = 0.2
+@export var Gravity = 600.0
 @export var JumpForce = 300.0
 @export var JumpCancelForce = 800.0
 @export var WallSlideSpeed = 50.0
 @export var CoyoteTimer = 0.08
 @export var JumpBufferTimer = 0.1
 @export var AttackCooldown = 0.5
-@export var DashCooldown = 1.5
-@export var DashForce = 1200.0
-@export var DashDuration = 0.1
+@export var DashCooldown = 0.5
+@export var DashForce = 500
+@export var DashDuration = 0.2
 @export var KnockBackForce = 200.0
 
 @export var MoveType = Element.NONE
@@ -77,13 +78,16 @@ func _physics_process(delta):
 
 func _physics_tick(delta):
 	var inputs = get_inputs()
+	#Get and set strength of any directional horizontal input (right - left, to get correct facing value)
+	var direction_x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	print(direction_x)
 	if(inputs.input_direction.x != 0 && inputs.input_direction.x != last_facing):
 		last_facing = inputs.input_direction.x
 	
 	jump_script.handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released, self, canWallJump, JumpForce, JumpCancelForce, JumpBufferTimer, JumpType)
 	dash_script.handle_dash(delta, last_facing, inputs.dash_pressed, self, DashForce, DashDuration, DashCooldown, DashType)
 	if not dash_script.dashing:
-		move_script.handle_velocity(delta, inputs.input_direction, self, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType)
+		move_script.handle_velocity(delta, direction_x, self, dash_script.dashing, Acceleration, MaxSpeed, Friction, AirResistance, MoveType)
 	jump_script.handle_gravity(delta, self, canWallJump, state, Gravity, WallSlideSpeed, CoyoteTimer)
 	attack_script.handle_attack(self, AttackCooldown, inputs.attack_pressed, AttackType, last_facing)
 	manage_animations()
