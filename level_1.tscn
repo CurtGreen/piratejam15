@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dy5bef3l6vvq3"]
 
-[ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://player.tscn" id="1_lr5js"]
+[ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://Scenes/Player/player.tscn" id="1_lr5js"]
 [ext_resource type="Texture2D" uid="uid://dcnotwqc0anm" path="res://Assets/Art/Level/tile_map_test.png" id="2_dpyxf"]
 [ext_resource type="Texture2D" uid="uid://c6qsyj7u0gacr" path="res://Assets/Art/Cellar_TileMaps/SI_Cellar.png" id="3_pgwno"]
 
