@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c36icjw27505w"]
 
 [ext_resource type="Texture2D" uid="uid://bi4cnnse8htlj" path="res://Assets/Art/UI/ResourceUI.png" id="1_0s45n"]
-[ext_resource type="Script" path="res://Scripts/UI/ResourceBar.gd" id="2_6snou"]
+[ext_resource type="Script" path="res://Scripts/Effects/ResourceBar.gd" id="2_6snou"]
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar.gd" id="3_8i1ko"]
 [ext_resource type="Texture2D" uid="uid://qr8wbh1gqqin" path="res://Assets/Art/UI/Heart.png" id="4_sxiub"]
 

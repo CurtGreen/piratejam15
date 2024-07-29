@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnnj24wupeuc0"]
+[gd_scene load_steps=14 format=3 uid="uid://bnnj24wupeuc0"]
 
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://Scenes/Enemies/test_dummy.tscn" id="1_7ivax"]
 [ext_resource type="Texture2D" uid="uid://ddgybhocm4o1p" path="res://icon.svg" id="2_qy1lx"]
 [ext_resource type="PackedScene" uid="uid://diq77ld1vcomu" path="res://Clutter_Animated/spikes.tscn" id="3_38evp"]
 [ext_resource type="TileSet" uid="uid://csjvltrnum7b6" path="res://Assets/Art/Cellar_TileMaps/Tileset_Dungeon_32pix.tres" id="4_sl17x"]
-[ext_resource type="PackedScene" uid="uid://cp307t6j20h8i" path="res://Clutter_Animated/door.tscn" id="5_np2wd"]
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://Scenes/Player/player.tscn" id="6_wjb5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0m8ac"]
@@ -151,8 +150,6 @@ z_index = 100
 tile_set = ExtResource("4_sl17x")
 format = 2
 layer_0/tile_data = PackedInt32Array(2359357, 1441792, 40, 2424893, 1441792, 41, 2490429, 1441792, 42, 2555965, 1441792, 43, 2359358, 1507328, 40, 2424894, 1507328, 41, 2490430, 1507328, 42, 2555966, 1507328, 43, 2359359, 1572864, 40, 2424895, 1572864, 41, 2490431, 1572864, 42, 2555967, 1572864, 43, 2359360, 1638400, 40, 2424896, 1638400, 41, 2490432, 1638400, 42, 2555968, 1638400, 43, 2424832, 131072, 33, 2490368, 131072, 33, 2555904, 131072, 34, 2621440, 131072, 35, 2424833, 196608, 33, 2490369, 196608, 33, 2555905, 196608, 34, 2621441, 196608, 35, 2424836, 131072, 33, 2490372, 131072, 33, 2555908, 131072, 34, 2621444, 131072, 35, 2424837, 196608, 33, 2490373, 196608, 33, 2555909, 196608, 34, 2621445, 196608, 35, 2031616, 0, 32, 2097152, 0, 33, 2031617, 65536, 32, 2097153, 65536, 33, 2031620, 0, 32, 2097156, 0, 33, 2031621, 65536, 32, 2097157, 65536, 33, 2162688, 131072, 33, 2162689, 196608, 33, 2228224, 131072, 33, 2228225, 196608, 33, 2293760, 131072, 33, 2293761, 196608, 33, 2359296, 131072, 33, 2359297, 196608, 33, 2359300, 131072, 33, 2359301, 196608, 33, 2293764, 131072, 33, 2293765, 196608, 33, 2228228, 131072, 33, 2228229, 196608, 33, 2162692, 131072, 33, 2162693, 196608, 33)
-
-[node name="Door" parent="LevelElements" instance=ExtResource("5_np2wd")]
 
 [node name="Player" parent="." instance=ExtResource("6_wjb5q")]
 position = Vector2(1006, 516)
