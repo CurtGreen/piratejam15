@@ -167,7 +167,7 @@ func do_take_damage(amt):
 	state = CharacterState.HURT
 	PlayerHealth -= amt
 	damage_taken.emit(PlayerHealth)
-	if PlayerHealth == 0:
+	if PlayerHealth <= 0:
 		state = CharacterState.DEATH
 
 

@@ -48,7 +48,7 @@ script = ExtResource("1_7r36v")
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Fire"]]
+[node name="Area2D" type="Area2D" parent="." groups=["Damage", "Fire"]]
 visible = false
 z_index = 1
 
