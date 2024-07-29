@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://p0yvffxq8t5s"]
+[gd_scene load_steps=8 format=3 uid="uid://p0yvffxq8t5s"]
 
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://Scenes/Player/player.tscn" id="1_bcx7d"]
 [ext_resource type="Texture2D" uid="uid://dcnotwqc0anm" path="res://Assets/Art/Level/tile_map_test.png" id="2_kxkl0"]
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://Scenes/Enemies/test_dummy.tscn" id="3_bhom5"]
+[ext_resource type="PackedScene" uid="uid://dvi0i1d3dblaf" path="res://Scenes/Enemies/homunculus.tscn" id="4_typql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gie44"]
 size = Vector2(46, 287)
@@ -54,13 +55,11 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_gie44")
 
 [node name="Player" parent="." instance=ExtResource("1_bcx7d")]
-position = Vector2(187, 128)
+position = Vector2(209, 149)
 EnableWallJumping = true
 MaxSpeed = 300.0
 Friction = 0.4
 AirResistance = 0.25
-MoveType = 2
-AttackType = 2
 DashType = 0
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -73,3 +72,9 @@ layer_0/tile_data = PackedInt32Array(1114110, 0, 0, 1179646, 0, 1, 1114111, 6553
 
 [node name="TestDummy" parent="." instance=ExtResource("3_bhom5")]
 position = Vector2(439, 230)
+
+[node name="Homunculus" parent="." instance=ExtResource("4_typql")]
+position = Vector2(394, 217)
+
+[node name="Homunculus2" parent="." instance=ExtResource("4_typql")]
+position = Vector2(21, 222)

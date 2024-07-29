@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvi0i1d3dblaf"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Homunculus.gd" id="1_i6j0b"]
+[ext_resource type="Texture2D" uid="uid://cbkntxr1pn84s" path="res://Assets/Art/Enemies/Homunculus/homunculus_move_and_chop.png" id="2_bgi6p"]
+[ext_resource type="Texture2D" uid="uid://t310855bt1rl" path="res://Assets/Art/Enemies/Homunculus/homunculus_idle.png" id="3_rnq4l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o7xlk"]
+radius = 14.0
+height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh5ey"]
+atlas = ExtResource("2_bgi6p")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lif7g"]
+atlas = ExtResource("2_bgi6p")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dko3m"]
+atlas = ExtResource("3_rnq4l")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78qm7"]
+atlas = ExtResource("3_rnq4l")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dmii"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh5ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lif7g")
+}],
+"loop": true,
+"name": &"Chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dko3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78qm7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3shsx"]
+size = Vector2(308, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40sxy"]
+size = Vector2(34, 48)
+
+[node name="Homunculus" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_i6j0b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+shape = SubResource("CapsuleShape2D_o7xlk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3dmii")
+animation = &"Idle"
+frame_progress = 0.103624
+
+[node name="Homunculus" type="Node2D" parent="."]
+
+[node name="ThreatDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatDetector"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_3shsx")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_40sxy")
+
+[connection signal="body_entered" from="ThreatDetector" to="." method="_on_threat_detector_body_entered"]
+[connection signal="body_exited" from="ThreatDetector" to="." method="_on_threat_detector_body_exited"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
