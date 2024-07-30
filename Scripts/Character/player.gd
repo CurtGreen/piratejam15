@@ -16,6 +16,7 @@ signal resource_modified
 @export var PlayerSpritePath : NodePath
 @export var AnimationPlayerPath : NodePath
 var PlayerSprite : AnimatedSprite2D
+var PlayerShadow : AnimatedSprite2D
 var AP : AnimationPlayer
 
 @export var EnableWallJumping = false
@@ -64,6 +65,7 @@ var attack_script
 
 func _ready():
 	PlayerSprite = get_node_or_null(PlayerSpritePath) if PlayerSpritePath != null else $AnimatedSprite2D
+	PlayerShadow = $AnimatedSprite2D/AnimatedSprite2D2
 	AP = get_node_or_null(AnimationPlayerPath) if AnimationPlayerPath != null else $AnimationPlayer
 	canWallJump = EnableWallJumping
 	PlayerHealth = MaxPlayerHealth
@@ -81,7 +83,6 @@ func _physics_tick(delta):
 	var inputs = get_inputs()
 	#Get and set strength of any directional horizontal input (right - left, to get correct facing value)
 	var direction_x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	print(direction_x)
 	if(inputs.input_direction.x != 0 && inputs.input_direction.x != last_facing):
 		last_facing = inputs.input_direction.x
 	
@@ -122,9 +123,11 @@ func manage_state():
 func manage_animations():
 	if last_facing < 0:
 		PlayerSprite.set_flip_h(true)
+		PlayerShadow.set_flip_h(true)
 		$BasicAttackCollider/CollisionShape2D.position.x = -20
 	elif last_facing > 0:
 		PlayerSprite.set_flip_h(false)
+		PlayerShadow.set_flip_h(false)
 		$BasicAttackCollider/CollisionShape2D.position.x = 20
 
 	match state:
@@ -171,7 +174,7 @@ func get_input_direction() -> Vector2:
 
 func do_take_damage(amt):
 	for i in $PlayerSpace.get_overlapping_areas():
-		if i.is_in_group("Enemy") and canTakeDmg and state != CharacterState.DEATH:
+		if  i != null and i.is_in_group("Enemy") and canTakeDmg and state != CharacterState.DEATH:
 			velocity = Vector2(sign(velocity.x) * -1 * KnockBackForce, KnockBackForce * 0.8 * -1)
 			state = CharacterState.HURT
 			PlayerHealth -= amt

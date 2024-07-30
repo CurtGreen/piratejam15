@@ -63,6 +63,8 @@ func handle_gravity(delta, body, can_wall_jump, state, Gravity, WallSlideSpeed, 
 	body.velocity = Vector2(body.velocity.x, body.velocity.y + float(Gravity * delta))
 	if can_wall_jump and state == body.CharacterState.WALL_SLIDE and not jumping:
 		body.velocity = Vector2(body.velocity.x, clamp(body.velocity.y, 0.0, WallSlideSpeed))
+	if body.is_on_floor():
+		body.PlayerShadow.visible = true
 
 	if not body.is_on_floor() and canJump:
 		coyote_time(CoyoteTimer, body)

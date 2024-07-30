@@ -48,6 +48,12 @@ script = ExtResource("1_7r36v")
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
+[node name="Flame2" type="GPUParticles2D" parent="." groups=["Fire"]]
+modulate = Color(0, 0, 0, 0.701961)
+position = Vector2(-15, 52)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_f4nyj")
+
 [node name="Area2D" type="Area2D" parent="." groups=["Damage", "Fire"]]
 visible = false
 z_index = 1
