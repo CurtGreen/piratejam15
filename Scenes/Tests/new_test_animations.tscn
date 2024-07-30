@@ -15,9 +15,13 @@ texture = ExtResource("2_kxkl0")
 0:1/0 = 0
 1:1/0 = 0
 2:2/0 = 0
+2:2/0/modulate = Color(0.38, 0.38, 0.38, 1)
 3:2/0 = 0
+3:2/0/modulate = Color(0.38, 0.38, 0.38, 1)
 2:3/0 = 0
+2:3/0/modulate = Color(0.38, 0.38, 0.38, 1)
 3:3/0 = 0
+3:3/0/modulate = Color(0.38, 0.38, 0.38, 1)
 
 [sub_resource type="TileSet" id="TileSet_ndft6"]
 sources/0 = SubResource("TileSetAtlasSource_6cl86")
@@ -60,6 +64,7 @@ EnableWallJumping = true
 MaxSpeed = 300.0
 Friction = 0.4
 AirResistance = 0.25
+AttackType = 2
 DashType = 0
 
 [node name="TileMap" type="TileMap" parent="."]
