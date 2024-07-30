@@ -119,7 +119,12 @@ func manage_state():
 			state = CharacterState.FALL
 
 func manage_animations():
-	PlayerSprite.set_flip_h(last_facing < 0)
+	if last_facing < 0:
+		PlayerSprite.set_flip_h(true)
+		$BasicAttackCollider/CollisionShape2D.position.x = -20
+	elif last_facing > 0:
+		PlayerSprite.set_flip_h(false)
+		$BasicAttackCollider/CollisionShape2D.position.x = 20
 
 	match state:
 		CharacterState.DEATH:
