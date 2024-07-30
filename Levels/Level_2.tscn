@@ -1,14 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://7w4f4culwd58"]
+[gd_scene load_steps=4 format=3 uid="uid://7w4f4culwd58"]
 
 [ext_resource type="Script" path="res://Clutter_Animated/door.gd" id="1_u4vtp"]
-[ext_resource type="PackedScene" uid="uid://dy5bef3l6vvq3" path="res://Levels/level_1.tscn" id="2_wpuon"]
 [ext_resource type="PackedScene" uid="uid://cp307t6j20h8i" path="res://Clutter_Animated/door.tscn" id="3_y8ecp"]
 [ext_resource type="TileSet" uid="uid://bbq2ha6guh04p" path="res://Tilesets/tile_map_1_with_collision.tres" id="4_0vhvf"]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_u4vtp")
-
-[node name="Level1" parent="." instance=ExtResource("2_wpuon")]
 
 [node name="Door" parent="." instance=ExtResource("3_y8ecp")]
 position = Vector2(1232, 512)
