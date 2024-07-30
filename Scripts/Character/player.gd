@@ -55,7 +55,7 @@ var AP : AnimationPlayer
 var last_facing = 1
 var state = CharacterState.IDLE
 var canWallJump
-var canAttack = true
+var canTakeDmg = true
 
 var move_script
 var jump_script
@@ -75,6 +75,7 @@ func _ready():
 
 func _physics_process(delta):
 	_physics_tick(delta)
+	do_take_damage(1)
 
 func _physics_tick(delta):
 	var inputs = get_inputs()
@@ -169,11 +170,20 @@ func get_input_direction() -> Vector2:
 		return Vector2(sign(xDir), sign(yDir))
 
 func do_take_damage(amt):
-	state = CharacterState.HURT
-	PlayerHealth -= amt
-	damage_taken.emit(PlayerHealth)
-	if PlayerHealth <= 0:
-		state = CharacterState.DEATH
+	for i in $PlayerSpace.get_overlapping_areas():
+		if i.is_in_group("Enemy") and canTakeDmg and state != CharacterState.DEATH:
+			velocity = Vector2(sign(velocity.x) * -1 * KnockBackForce, KnockBackForce * 0.8 * -1)
+			state = CharacterState.HURT
+			PlayerHealth -= amt
+			damage_taken.emit(PlayerHealth)
+			canTakeDmg = false
+			if PlayerHealth <= 0:
+				state = CharacterState.DEATH
+			await get_tree().create_timer(0.3).timeout
+			canTakeDmg = true
+			
+	
+	
 
 
 func change_element(element, amount):
@@ -205,3 +215,5 @@ func _on_animation_player_animation_finished(anim_name: String):
 	elif state == CharacterState.DEATH:
 		disable_mode = CollisionObject2D.DISABLE_MODE_MAKE_STATIC
 		process_mode = Node.PROCESS_MODE_DISABLED
+
+	

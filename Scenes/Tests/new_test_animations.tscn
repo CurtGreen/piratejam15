@@ -60,7 +60,6 @@ EnableWallJumping = true
 MaxSpeed = 300.0
 Friction = 0.4
 AirResistance = 0.25
-AttackType = 2
 DashType = 0
 
 [node name="TileMap" type="TileMap" parent="."]

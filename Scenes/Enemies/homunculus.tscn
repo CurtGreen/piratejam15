@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvi0i1d3dblaf"]
+[gd_scene load_steps=13 format=3 uid="uid://dvi0i1d3dblaf"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Homunculus.gd" id="1_i6j0b"]
 [ext_resource type="Texture2D" uid="uid://cbkntxr1pn84s" path="res://Assets/Art/Enemies/Homunculus/homunculus_move_and_chop.png" id="2_bgi6p"]
@@ -55,6 +55,9 @@ size = Vector2(308, 43)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40sxy"]
 size = Vector2(34, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xafau"]
+size = Vector2(20, 33)
+
 [node name="Homunculus" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_i6j0b")
 
@@ -64,8 +67,7 @@ shape = SubResource("CapsuleShape2D_o7xlk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3dmii")
-animation = &"Idle"
-frame_progress = 0.103624
+animation = &"Chase"
 
 [node name="Homunculus" type="Node2D" parent="."]
 
@@ -81,6 +83,14 @@ shape = SubResource("RectangleShape2D_3shsx")
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_40sxy")
 
+[node name="DamageArea" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-19, 3.5)
+shape = SubResource("RectangleShape2D_xafau")
+disabled = true
+
 [connection signal="body_entered" from="ThreatDetector" to="." method="_on_threat_detector_body_entered"]
 [connection signal="body_exited" from="ThreatDetector" to="." method="_on_threat_detector_body_exited"]
 [connection signal="area_shape_entered" from="Damagable" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]
