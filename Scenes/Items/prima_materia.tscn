@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://f64psdde0ybn"]
+
+[ext_resource type="Texture2D" uid="uid://dq6vp21e3woxc" path="res://Assets/Art/Items/prima_materia.png" id="1_j0p0n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfcfe"]
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["prima_materia"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wfcfe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j0p0n")
