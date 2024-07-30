@@ -119,6 +119,7 @@ func manage_state():
 			state = CharacterState.WALL_SLIDE
 		else:
 			state = CharacterState.FALL
+			PlayerShadow.visible = false
 
 func manage_animations():
 	if last_facing < 0:
