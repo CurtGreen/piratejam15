@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://f64psdde0ybn"]
+[gd_scene load_steps=4 format=3 uid="uid://f64psdde0ybn"]
 
 [ext_resource type="Texture2D" uid="uid://dq6vp21e3woxc" path="res://Assets/Art/Items/prima_materia.png" id="1_j0p0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wfcfe"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxwbc"]
+
 [node name="RigidBody2D" type="RigidBody2D" groups=["prima_materia"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["prima_materia"]]
 shape = SubResource("RectangleShape2D_wfcfe")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["prima_materia"]]
 texture = ExtResource("1_j0p0n")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.76, 1.76)
+shape = SubResource("CircleShape2D_xxwbc")
