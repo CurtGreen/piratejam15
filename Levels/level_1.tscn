@@ -183,15 +183,11 @@ position = Vector2(1232, 512)
 
 [node name="Player" parent="." instance=ExtResource("1_lo6pc")]
 z_index = 1
-<<<<<<< Updated upstream
 position = Vector2(1112, 520)
 EnableWallJumping = true
 JumpType = 0
 AttackType = 2
 DashType = 1
-=======
-position = Vector2(776, 432)
->>>>>>> Stashed changes
 
 [node name="Stage" type="TileMap" parent="."]
 position = Vector2(0, -8)
