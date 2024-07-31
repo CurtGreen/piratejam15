@@ -1,0 +1,136 @@
+[gd_scene load_steps=20 format=3 uid="uid://cjruv2g365jwg"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Elemental.gd" id="1_lipwb"]
+[ext_resource type="Texture2D" uid="uid://y52gr8hxux8f" path="res://Assets/Art/Enemies/Elemental/elemental_hurt.png" id="2_i6oqf"]
+[ext_resource type="Texture2D" uid="uid://6354kph5eibd" path="res://Assets/Art/Enemies/Elemental/elemental_attack.png" id="2_r33kh"]
+[ext_resource type="Texture2D" uid="uid://b5f4spb20781e" path="res://Assets/Art/Enemies/Elemental/elemental_idle.png" id="3_p5qot"]
+[ext_resource type="Texture2D" uid="uid://cex4cos2f1hk8" path="res://Assets/Art/Enemies/Elemental/elemental_walk.png" id="4_0v44b"]
+[ext_resource type="AudioStream" uid="uid://bhuo0snygayli" path="res://Assets/Sounds/RockThrow.wav" id="6_mnbg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c3qv"]
+atlas = ExtResource("2_r33kh")
+region = Rect2(0, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un50l"]
+atlas = ExtResource("2_r33kh")
+region = Rect2(64, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tm5a"]
+atlas = ExtResource("2_i6oqf")
+region = Rect2(0, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rq1h"]
+atlas = ExtResource("2_i6oqf")
+region = Rect2(64, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o007v"]
+atlas = ExtResource("3_p5qot")
+region = Rect2(0, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2g3d"]
+atlas = ExtResource("3_p5qot")
+region = Rect2(64, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsyyn"]
+atlas = ExtResource("4_0v44b")
+region = Rect2(0, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vne3v"]
+atlas = ExtResource("4_0v44b")
+region = Rect2(64, 0, 64, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oveju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c3qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un50l")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tm5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rq1h")
+}],
+"loop": false,
+"name": &"Hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o007v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2g3d")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsyyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vne3v")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jwhp0"]
+radius = 26.0
+height = 68.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndwnk"]
+size = Vector2(60, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyg3p"]
+size = Vector2(570, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqxs0"]
+size = Vector2(21, 58)
+
+[node name="Elemental" type="CharacterBody2D"]
+script = ExtResource("1_lipwb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oveju")
+animation = &"Attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0)
+shape = SubResource("CapsuleShape2D_jwhp0")
+
+[node name="Damagable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagable"]
+position = Vector2(-3, -2.5)
+shape = SubResource("RectangleShape2D_ndwnk")
+
+[node name="ThreatZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatZone"]
+position = Vector2(65, -16)
+shape = SubResource("RectangleShape2D_yyg3p")
+
+[node name="DamageArea" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(33.5, -1)
+shape = SubResource("RectangleShape2D_wqxs0")
+
+[node name="Waterball" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mnbg1")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Damagable" to="." method="_on_damagable_area_entered"]
+[connection signal="area_entered" from="ThreatZone" to="." method="_on_threat_detector_body_entered"]

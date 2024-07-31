@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqxoj8vl67m3u"]
+
+[ext_resource type="Script" path="res://Levels/EndGame.gd" id="1_8u0n2"]
+[ext_resource type="Texture2D" uid="uid://cu1spwnifj0bc" path="res://Assets/Art/Level/EndingScreenBackground.png" id="1_wc0uk"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_8u0n2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Container" parent="CanvasLayer"]
+offset_left = 643.0
+offset_top = 340.0
+offset_right = 985.0
+offset_bottom = 717.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Container"]
+layout_mode = 2
+texture = ExtResource("1_wc0uk")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+offset_left = 595.0
+offset_top = 405.0
+offset_right = 730.0
+offset_bottom = 450.0
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "Play Again?"
+icon_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/BoxContainer/Button" to="." method="_on_button_pressed"]

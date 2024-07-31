@@ -1,9 +1,9 @@
 extends Node2D
 
 func _on_area_2d_area_entered(area):
-	if area.is_in_group("Damage"):
+	if area.is_in_group("Activate"):
 		$Area2D/AnimationPlayer.play("Switch")
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.5).timeout
 		print("timerisworking")
 		$Area2D/AnimationPlayer.play_backwards("Switch")
 		var scene = preload("res://Scenes/Items/prima_materia.tscn")

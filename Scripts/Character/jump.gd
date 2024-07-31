@@ -16,6 +16,7 @@ func handle_jump(delta, move_direction, jump_strength, jump_pressed, _jump_relea
 		maxJumps = 1
 
 	if (jump_pressed or shouldJump) and (canJump or jumpCount < maxJumps):
+		body.get_node("Jump").play()
 		apply_jump(move_direction, body, JumpForce, JumpDirections.UP)
 		jumpCount += 1
 		if jumpCount == 2:

@@ -54,7 +54,7 @@ position = Vector2(-15, 52)
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Damage", "Fire"]]
+[node name="Area2D" type="Area2D" parent="." groups=["Activate", "Damage", "Fire"]]
 visible = false
 z_index = 1
 
