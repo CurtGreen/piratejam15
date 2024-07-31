@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b50chdnh01k4w"]
+
+[ext_resource type="Texture2D" uid="uid://clsocm3crbmt2" path="res://Assets/Art/Items/snowflake.png" id="1_2tkoj"]
+
+[sub_resource type="Gradient" id="Gradient_p4ud2"]
+offsets = PackedFloat32Array(0, 0.55609, 1)
+colors = PackedColorArray(0.59, 0.719833, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_85t3t"]
+gradient = SubResource("Gradient_p4ud2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pgmmp"]
+lifetime_randomness = 0.42
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 64, 1)
+angle_min = -690.4
+angle_max = 101.6
+direction = Vector3(1, 1, 0)
+gravity = Vector3(60, 98, 0)
+linear_accel_min = -71.88
+linear_accel_max = 41.65
+radial_accel_max = 6.0
+tangential_accel_max = 11.17
+damping_max = 11.176
+scale_min = 0.01
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_85t3t")
+turbulence_enabled = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7g4qb"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+color = Color(1, 1, 1, 0.423529)
+
+[node name="FrostEffect" type="Node2D"]
+
+[node name="snowflake" type="GPUParticles2D" parent="."]
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_pgmmp")
+texture = ExtResource("1_2tkoj")
+lifetime = 4.0
+
+[node name="wallfreeze" type="GPUParticles2D" parent="."]
+z_index = -1
+process_material = SubResource("ParticleProcessMaterial_7g4qb")
+lifetime = 0.7

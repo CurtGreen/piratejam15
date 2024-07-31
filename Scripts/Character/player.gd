@@ -101,10 +101,11 @@ func blocking_state():
 	if state == CharacterState.ATTACK:
 		block = true
 	elif state == CharacterState.HURT:
-		block = true
+		block = true                  
 
 
 func manage_state():
+	print(state)
 	if dash_script.dashing:
 		state = CharacterState.DASH
 	elif is_on_floor():
@@ -115,12 +116,23 @@ func manage_state():
 	elif velocity.y < 0:
 		state = CharacterState.JUMP
 	elif not is_on_floor():
-		if canWallJump and is_on_wall_only() and get_input_direction().x != 0:
-			state = CharacterState.WALL_SLIDE
+		if canWallJump and is_on_wall_only() and get_input_direction().x != 0 and PlayerWaterResource > 0:
+			if state != CharacterState.WALL_SLIDE:
+				var scene = preload("res://Scenes/Effects/FROST_Effect.tscn")
+				var  frost = scene.instantiate() as Node2D
+				frost.position.x = 15 * last_facing
+				frost.get_node_or_null("wallfreeze").process_material.emission_shape_offset.x = 5*last_facing
+				add_child(frost)	
+				change_element(Element.WATER, -30)
+			state = CharacterState.WALL_SLIDE			
 		else:
 			state = CharacterState.FALL
 			PlayerShadow.visible = false
-
+	if not state == CharacterState.WALL_SLIDE:
+		var frost = get_node_or_null("FrostEffect")
+		if frost != null:
+			frost.queue_free()
+			
 func manage_animations():
 	if last_facing < 0:
 		PlayerSprite.set_flip_h(true)
@@ -185,10 +197,6 @@ func do_take_damage(amt):
 				state = CharacterState.DEATH
 			await get_tree().create_timer(0.3).timeout
 			canTakeDmg = true
-			
-	
-	
-
 
 func change_element(element, amount):
 	if element == Element.FIRE:
@@ -212,6 +220,11 @@ func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("HurtPlayer"):
 		do_take_damage(1)
 		body.queue_free()
+	if body.is_in_group("PrimaMateria"):
+		change_element(Element.FIRE, 30)
+		change_element(Element.AIR, 30)
+		change_element(Element.WATER, 30)
+		change_element(Element.EARTH, 30)
 	
 func _on_animation_player_animation_finished(anim_name: String):
 	if(not state == CharacterState.DEATH):

@@ -15,9 +15,10 @@ func handle_dash(delta, move_direction, dash_pressed, body, DashForce, DashDurat
 	if dash_pressed and canDash and not dashing and dashCount < maxDashes:
 		dashing = true
 		dashCount += 1
-		if element == body.Element.AIR:
-			body.change_element(body.Element.AIR, -10)
-		if element == body.Element.EARTH:
+#		if element == body.Element.AIR:
+#			body.change_element(body.Element.AIR, -10)
+		if element == body.Element.EARTH and body.PlayerEarthResource > 0 :
+			body.change_element(body.Element.EARTH, -20)
 			body.velocity = Vector2(DashForce * move_direction, -1 * DashForce * 1.5 )
 		else:
 			body.velocity = Vector2(DashForce * move_direction, body.velocity.y)
