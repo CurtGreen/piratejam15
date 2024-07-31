@@ -10,7 +10,7 @@ var maxJumps = 2
 enum JumpDirections { UP = -1, DOWN = 1 }
 
 func handle_jump(delta, move_direction, jump_strength, jump_pressed, _jump_released, body, can_wall_jump, JumpForce, JumpCancelForce, JumpBufferTimer, element):
-	if element == body.Element.AIR:
+	if element == body.Element.AIR and body.PlayerAirResource > 0:
 		maxJumps = 2
 	else:
 		maxJumps = 1
