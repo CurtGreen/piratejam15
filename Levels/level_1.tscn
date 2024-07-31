@@ -4,25 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://Scenes/Player/player.tscn" id="1_lo6pc"]
 [ext_resource type="TileSet" uid="uid://bbq2ha6guh04p" path="res://Tilesets/tile_map_1_with_collision.tres" id="2_hxh3j"]
 [ext_resource type="Texture2D" uid="uid://dcnotwqc0anm" path="res://Assets/Art/Level/tile_map_test.png" id="2_txsuw"]
-
-[sub_resource type="GDScript" id="GDScript_facyq"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func _on_start_button_button_down():
-	pass
-	
-"
+[ext_resource type="PackedScene" uid="uid://d1cwyikc07aef" path="res://Clutter_Animated/Lever.tscn" id="5_bjud1"]
 
 [sub_resource type="GDScript" id="GDScript_fahxy"]
 script/source = "extends TileMap
@@ -192,7 +174,6 @@ func _process(delta):
 "
 
 [node name="Level1" type="Node2D"]
-script = SubResource("GDScript_facyq")
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(128, 528)
@@ -202,11 +183,15 @@ position = Vector2(1232, 512)
 
 [node name="Player" parent="." instance=ExtResource("1_lo6pc")]
 z_index = 1
+<<<<<<< Updated upstream
 position = Vector2(1112, 520)
 EnableWallJumping = true
 JumpType = 0
 AttackType = 2
 DashType = 1
+=======
+position = Vector2(776, 432)
+>>>>>>> Stashed changes
 
 [node name="Stage" type="TileMap" parent="."]
 position = Vector2(0, -8)
@@ -218,7 +203,7 @@ script = SubResource("GDScript_fahxy")
 [node name="Platforms" type="TileMap" parent="."]
 tile_set = ExtResource("2_hxh3j")
 format = 2
-layer_0/tile_data = PackedInt32Array(2621412, 0, 0, 2621413, 65536, 0, 2621414, 131072, 0, 2621415, 196608, 0, 2621416, 262144, 0, 2621417, 327680, 0, 2883556, 0, 0, 2883557, 65536, 0, 2883558, 131072, 0, 2883559, 196608, 0, 2883560, 262144, 0, 2883561, 327680, 0, 2686948, 0, 1, 2686949, 65536, 1, 2686950, 131072, 1, 2686951, 196608, 1, 2686952, 262144, 1, 2686953, 327680, 1, 2949092, 0, 1, 2949093, 65536, 1, 2949094, 131072, 1, 2949095, 196608, 1, 2949096, 262144, 1, 2949097, 327680, 1)
+layer_0/tile_data = PackedInt32Array(2621412, 0, 0, 2621413, 65536, 0, 2621414, 131072, 0, 2621415, 196608, 0, 2621416, 262144, 0, 2621417, 327680, 0, 2883556, 0, 0, 2883557, 65536, 0, 2883558, 131072, 0, 2883559, 196608, 0, 2883560, 262144, 0, 2883561, 327680, 0, 2686948, 0, 1, 2686949, 65536, 1, 2686950, 131072, 1, 2686951, 196608, 1, 2686952, 262144, 1, 2686953, 327680, 1, 2949092, 0, 1, 2949093, 65536, 1, 2949094, 131072, 1, 2949095, 196608, 1, 2949096, 262144, 1, 2949097, 327680, 1, 2031669, 65536, 0, 2031670, 131072, 0, 2031671, 196608, 0)
 script = SubResource("GDScript_7egce")
 
 [node name="LeverBox" type="TileMap" parent="."]
@@ -228,3 +213,6 @@ rendering_quadrant_size = 8
 format = 2
 layer_0/tile_data = PackedInt32Array(3932244, 65536, 3, 3932245, 131072, 3, 3932246, 196608, 3, 3932247, 0, 3, 3932248, 65536, 3, 3932249, 131072, 3, 3932250, 196608, 3, 3932251, 0, 3, 3932252, 65536, 3, 3932253, 131072, 3, 3932254, 196608, 3, 3932255, 0, 3, 3932256, 65536, 3, 3932257, 131072, 3, 3932258, 196608, 3, 3932259, 0, 3, 2949203, 0, 0, 3014739, 0, 1, 3080275, 0, 2, 3145811, 0, 3, 3211347, 0, 0, 3276883, 0, 1, 3342419, 0, 2, 3407955, 0, 3, 3473491, 0, 0, 3539027, 0, 1, 3604563, 0, 2, 3670099, 0, 3, 3735635, 0, 0, 3801171, 0, 1, 3866707, 0, 2, 3932243, 0, 3, 2949204, 0, 0, 3014740, 0, 1, 3080276, 0, 2, 3145812, 0, 3, 3211348, 0, 0, 3276884, 0, 1, 3342420, 0, 2, 3407956, 0, 3, 3473492, 0, 0, 3539028, 0, 1, 3604564, 0, 2, 3670100, 0, 3, 3735636, 0, 0, 3801172, 0, 1, 3866708, 65536, 2, 3866709, 131072, 2, 3866710, 196608, 2, 3866711, 0, 2, 3866712, 65536, 2, 3866713, 131072, 2, 3866714, 196608, 2, 3866715, 0, 2, 3866716, 65536, 2, 3866717, 131072, 2, 3866718, 196608, 2, 3866719, 0, 2, 3866720, 65536, 2, 3866721, 131072, 2, 3866722, 196608, 2, 3866723, 0, 2)
 script = SubResource("GDScript_bmxub")
+
+[node name="Lever" parent="." instance=ExtResource("5_bjud1")]
+position = Vector2(720, 440)

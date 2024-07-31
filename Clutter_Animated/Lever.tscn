@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1cwyikc07aef"]
+
+[ext_resource type="Texture2D" uid="uid://mr0l8nosh8vr" path="res://Assets/Art/Level/lever.png" id="1_82c5v"]
+[ext_resource type="Script" path="res://Scripts/Lever.gd" id="1_dxpsg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpbk1"]
+size = Vector2(16, 40)
+
+[sub_resource type="Animation" id="Animation_8sdy8"]
+resource_name = "Switch"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeverSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7crnr"]
+_data = {
+"Switch": SubResource("Animation_8sdy8")
+}
+
+[node name="Lever" type="Node2D"]
+script = ExtResource("1_dxpsg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="LeverSprite" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_82c5v")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_cpbk1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7crnr")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
