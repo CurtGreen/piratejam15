@@ -13,6 +13,7 @@ func handle_dash(delta, move_direction, dash_pressed, body, DashForce, DashDurat
 		maxDashes = 1
 
 	if dash_pressed and canDash and not dashing and dashCount < maxDashes:
+		body.get_node("Dash").play()
 		dashing = true
 		dashCount += 1
 #		if element == body.Element.AIR:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://p0yvffxq8t5s"]
+[gd_scene load_steps=9 format=3 uid="uid://p0yvffxq8t5s"]
 
 [ext_resource type="PackedScene" uid="uid://dxwf54h6mqpr3" path="res://Scenes/Player/player.tscn" id="1_bcx7d"]
 [ext_resource type="Texture2D" uid="uid://dcnotwqc0anm" path="res://Assets/Art/Level/tile_map_test.png" id="2_kxkl0"]
 [ext_resource type="PackedScene" uid="uid://vbkjt3eig0p0" path="res://Scenes/Enemies/test_dummy.tscn" id="3_bhom5"]
 [ext_resource type="PackedScene" uid="uid://dvi0i1d3dblaf" path="res://Scenes/Enemies/homunculus.tscn" id="4_typql"]
+[ext_resource type="PackedScene" uid="uid://cjruv2g365jwg" path="res://Scenes/Enemies/elemental.tscn" id="5_f4mf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gie44"]
 size = Vector2(46, 287)
@@ -78,8 +79,10 @@ layer_0/tile_data = PackedInt32Array(1114110, 0, 0, 1179646, 0, 1, 1114111, 6553
 [node name="TestDummy" parent="." instance=ExtResource("3_bhom5")]
 position = Vector2(439, 230)
 
-[node name="Homunculus" parent="." instance=ExtResource("4_typql")]
-position = Vector2(394, 217)
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="Homunculus2" parent="." instance=ExtResource("4_typql")]
-position = Vector2(21, 222)
+[node name="Homunculus" parent="Node2D" instance=ExtResource("4_typql")]
+position = Vector2(388, 220)
+
+[node name="CharacterBody2D" parent="Node2D" instance=ExtResource("5_f4mf2")]
+position = Vector2(91, 225)

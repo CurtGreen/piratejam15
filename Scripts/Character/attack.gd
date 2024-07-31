@@ -14,6 +14,7 @@ func handle_attack(character, attack_cooldown, attack_pressed, element, directio
 			character.get_parent().add_child(fireball)
 			fireball.position = Vector2(character.position.x +(30*direction), character.position.y) # Adjust the position as needed
 			fireball.direction = direction
+			character.get_node("Fire").play()
 			await character.get_tree().create_timer(attack_cooldown).timeout
 			CanAttack = true
 #		elif element == character.Element.WATER:

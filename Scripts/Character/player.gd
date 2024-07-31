@@ -8,10 +8,10 @@ signal resource_modified
 
 @export var PlayerHealth = 5
 @export var MaxPlayerHealth = 5
-@export var PlayerFireResource = 100
+@export var PlayerFireResource = 0
 @export var PlayerWaterResource = 100
-@export var PlayerAirResource = 100
-@export var PlayerEarthResource = 100
+@export var PlayerAirResource = 50
+@export var PlayerEarthResource = 0
 
 @export var PlayerSpritePath : NodePath
 @export var AnimationPlayerPath : NodePath
@@ -69,6 +69,7 @@ func _ready():
 	AP = get_node_or_null(AnimationPlayerPath) if AnimationPlayerPath != null else $AnimationPlayer
 	canWallJump = EnableWallJumping
 	PlayerHealth = MaxPlayerHealth
+	resource_modified.emit(PlayerFireResource, PlayerAirResource, PlayerWaterResource, PlayerEarthResource)
 
 	move_script = preload("res://Scripts/Character/move.gd").new()
 	jump_script = preload("res://Scripts/Character/jump.gd").new()
@@ -105,7 +106,6 @@ func blocking_state():
 
 
 func manage_state():
-	print(state)
 	if dash_script.dashing:
 		state = CharacterState.DASH
 	elif is_on_floor():
@@ -146,6 +146,8 @@ func manage_animations():
 	match state:
 		CharacterState.DEATH:
 			AP.play("Death")
+			await get_tree().create_timer(1).timeout
+			get_tree().change_scene_to_file("res://Levels/EndGame.tscn")
 		CharacterState.HURT:
 			AP.play("Hurt")
 		CharacterState.ATTACK:
@@ -189,6 +191,15 @@ func do_take_damage(amt):
 	for i in $PlayerSpace.get_overlapping_areas():
 		if  i != null and i.is_in_group("Enemy") and canTakeDmg and state != CharacterState.DEATH:
 			velocity = Vector2(sign(velocity.x) * -1 * KnockBackForce, KnockBackForce * 0.8 * -1)
+			state = CharacterState.HURT
+			PlayerHealth -= amt
+			damage_taken.emit(PlayerHealth)
+			canTakeDmg = false
+			if PlayerHealth <= 0:
+				state = CharacterState.DEATH
+			await get_tree().create_timer(0.3).timeout
+			canTakeDmg = true
+		elif i != null and i.is_in_group("HurtPlayer") and canTakeDmg and state != CharacterState.DEATH:
 			state = CharacterState.HURT
 			PlayerHealth -= amt
 			damage_taken.emit(PlayerHealth)

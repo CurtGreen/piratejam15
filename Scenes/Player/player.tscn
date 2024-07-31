@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dxwf54h6mqpr3"]
+[gd_scene load_steps=51 format=3 uid="uid://dxwf54h6mqpr3"]
 
 [ext_resource type="Script" path="res://Scripts/Character/player.gd" id="1_tetbr"]
 [ext_resource type="Texture2D" uid="uid://ce758f2sajg78" path="res://Assets/Art/Player/player_idle.png" id="2_vsqsm"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://pxhfbeccyy6b" path="res://Assets/Art/Player/player_dash.png" id="5_2l56h"]
 [ext_resource type="Texture2D" uid="uid://bog63w36tglxd" path="res://Assets/Art/Player/player_injuryanddeath.png" id="5_xlywo"]
 [ext_resource type="PackedScene" uid="uid://c36icjw27505w" path="res://Scenes/hud.tscn" id="9_rkkrn"]
+[ext_resource type="AudioStream" uid="uid://boh7sbw2oyo02" path="res://Assets/Sounds/FireToggle.wav" id="10_8qt5q"]
+[ext_resource type="AudioStream" uid="uid://b2uoyn8wsch5f" path="res://Assets/Sounds/WindJump2.wav" id="11_8b3xs"]
+[ext_resource type="AudioStream" uid="uid://ogbx8coj0xs6" path="res://Assets/Sounds/RockJump.wav" id="12_v60au"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3lhg"]
 radius = 18.0
@@ -779,7 +782,7 @@ zoom = Vector2(2, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_y3lhg")
 
-[node name="BasicAttackCollider" type="Area2D" parent="." groups=["Damage"]]
+[node name="BasicAttackCollider" type="Area2D" parent="." groups=["Activate", "Damage"]]
 z_index = 1
 position = Vector2(-0.999939, 3.05176e-05)
 scale = Vector2(1.00154, 1.00083)
@@ -830,6 +833,15 @@ offset_top = 15.0
 offset_right = 100.0
 offset_bottom = 26.0
 grow_vertical = 1
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_8qt5q")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_8b3xs")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_v60au")
 
 [connection signal="damage_taken" from="." to="HUD/HealthBar" method="_on_player_damage_taken"]
 [connection signal="resource_modified" from="." to="HUD/ResourceBar" method="_on_player_resource_modified"]

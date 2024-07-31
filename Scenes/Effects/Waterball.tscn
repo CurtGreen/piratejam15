@@ -48,8 +48,7 @@ script = ExtResource("1_pfrw3")
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_f4nyj")
 
-[node name="Area2D" type="Area2D" parent="." groups=["Damage", "Water"]]
-visible = false
+[node name="Area2D" type="Area2D" parent="." groups=["HurtPlayer", "Water"]]
 z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Damage", "Water"]]
@@ -57,7 +56,7 @@ scale = Vector2(0.279999, 0.439999)
 shape = SubResource("CircleShape2D_we12h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Damage", "Water"]]
-visible = false
+z_index = 1
 scale = Vector2(0.206013, 0.206013)
 shape = SubResource("CircleShape2D_220l6")
 disabled = true
