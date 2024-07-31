@@ -207,10 +207,10 @@ func change_element(element, amount):
 		PlayerWaterResource += amount
 	elif element == Element.EARTH:
 		PlayerEarthResource += amount
-	clamp(PlayerFireResource, 0,100)
-	clamp(PlayerAirResource, 0,100)
-	clamp(PlayerWaterResource, 0,100)
-	clamp(PlayerEarthResource, 0,100)
+	PlayerFireResource = clamp(PlayerFireResource, 0,100)
+	PlayerAirResource = clamp(PlayerAirResource, 0,100)
+	PlayerWaterResource = clamp(PlayerWaterResource, 0,100)
+	PlayerEarthResource = clamp(PlayerEarthResource, 0,100)
 	resource_modified.emit(PlayerFireResource, PlayerAirResource, PlayerWaterResource, PlayerEarthResource)
 	
 func _on_player_space_body_entered(body: Node2D):
@@ -220,11 +220,12 @@ func _on_player_space_body_entered(body: Node2D):
 	if body.is_in_group("HurtPlayer"):
 		do_take_damage(1)
 		body.queue_free()
-	if body.is_in_group("PrimaMateria"):
+	if body.is_in_group("prima_materia"):
 		change_element(Element.FIRE, 30)
 		change_element(Element.AIR, 30)
 		change_element(Element.WATER, 30)
 		change_element(Element.EARTH, 30)
+		body.queue_free()
 	
 func _on_animation_player_animation_finished(anim_name: String):
 	if(not state == CharacterState.DEATH):
